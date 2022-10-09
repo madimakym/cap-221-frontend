@@ -1,6 +1,6 @@
 import { HelmetProvider } from "react-helmet-async";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { RegisterPage } from "./features/register";
+import { RegisterPage } from "./features/user";
 import { NotFoundPage } from "./features/NotFound";
 
 function App() {

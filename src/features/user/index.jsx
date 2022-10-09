@@ -17,16 +17,30 @@ import moment from "moment";
 import "moment/locale/fr";
 import locale from "antd/es/date-picker/locale/fr_FR";
 import "./styles/style.scss";
+import { useRegisterMutation } from "./service/user-api";
 const { Option } = Select;
 
 export function RegisterPage() {
   const [date, setDate] = useState();
-  const [isSuccess, setIsSuccess] = useState();
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const [register] = useRegisterMutation();
 
   const onFinish = (values) => {
-    const data = { ...values, dob: date };
+    const data = { ...values, dob: date, password: "passer", role: "user" };
+    setIsLoading(true);
 
-    console.log("data:", data);
+    register(data)
+      .unwrap()
+      .then(() => {
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        setError(error.data.message);
+        console.log("error1: ===>", error);
+      });
   };
 
   const handleChangeDate = (date, dateString) => {
@@ -66,7 +80,7 @@ export function RegisterPage() {
                     initialValues={{
                       firstname: "Makymadi",
                       lastname: "Madi",
-                      email: "makymadi@gmail.com",
+                      email: "makymadi123@gmail.com",
                       phone: "3333333",
                       cni: "s23s",
                       secteur: "Informatique",
@@ -259,7 +273,11 @@ export function RegisterPage() {
                     </Row>
 
                     <Form.Item>
-                      <Button type="primary" htmlType="submit">
+                      <Button
+                        type="primary"
+                        htmlType="submit"
+                        loading={isLoading}
+                      >
                         Valider
                       </Button>
                     </Form.Item>

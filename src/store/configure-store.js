@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { registerApi } from "../features/register/service/register-api";
+import { userApi } from "../features/user/service/user-api";
 
 export default configureStore({
   reducer: {
-    [registerApi.reducerPath]: registerApi.reducer,
+    [userApi.reducerPath]: userApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(registerApi.middleware),
+    getDefaultMiddleware().concat(userApi.middleware),
 });
