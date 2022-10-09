@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
   Col,
   Row,
@@ -7,19 +8,32 @@ import {
   DatePicker,
   Form,
   Input,
+  Select,
   Upload,
 } from "antd";
 import { Helmet } from "react-helmet-async";
 import { UploadOutlined } from "@ant-design/icons";
+import moment from "moment";
+import "moment/locale/fr";
+import locale from "antd/es/date-picker/locale/fr_FR";
 import "./styles/style.scss";
+const { Option } = Select;
 
 export function RegisterPage() {
+  const [date, setDate] = useState();
+  const [isSuccess, setIsSuccess] = useState();
+
   const onFinish = (values) => {
-    console.log("Success:", values);
+    const data = { ...values, dob: date };
+
+    console.log("data:", data);
   };
 
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+  const handleChangeDate = (date, dateString) => {
+    console.log("ddateStringata:", dateString);
+    console.log("date:", date);
+
+    setDate(dateString);
   };
 
   return (
@@ -48,8 +62,15 @@ export function RegisterPage() {
                     name="basic"
                     layout="vertical"
                     onFinish={onFinish}
-                    onFinishFailed={onFinishFailed}
-                    autoComplete="off"
+                    defaultValue={moment("2015-01-01", "YYYY-MM-DD")}
+                    initialValues={{
+                      firstname: "Makymadi",
+                      lastname: "Madi",
+                      email: "makymadi@gmail.com",
+                      phone: "3333333",
+                      cni: "s23s",
+                      secteur: "Informatique",
+                    }}
                   >
                     <Row gutter={24}>
                       <Col lg={12}>
@@ -92,16 +113,7 @@ export function RegisterPage() {
                           <Input />
                         </Form.Item>
 
-                        <Form.Item
-                          label="Date de naissance"
-                          name="dob"
-                          rules={[
-                            {
-                              required: true,
-                              message: "Champs requis!",
-                            },
-                          ]}
-                        >
+                        <Form.Item label="Date de naissance" name="dob">
                           <Space
                             direction="vertical"
                             style={{
@@ -109,10 +121,13 @@ export function RegisterPage() {
                             }}
                           >
                             <DatePicker
+                              defaultValue={moment("2015-01-01", "YYYY-MM-DD")}
                               placeholder=" "
                               style={{
                                 width: "100%",
                               }}
+                              locale={locale}
+                              onChange={handleChangeDate}
                             />
                           </Space>
                         </Form.Item>
@@ -153,7 +168,7 @@ export function RegisterPage() {
 
                         <Form.Item
                           label="Numéro CNI"
-                          name="secteur"
+                          name="cni"
                           rules={[
                             {
                               required: true,
@@ -164,7 +179,28 @@ export function RegisterPage() {
                           <Input />
                         </Form.Item>
 
-                        <Row>
+                        <Form.Item
+                          name="metier"
+                          label="metier"
+                          rules={[
+                            {
+                              required: true,
+                              message: "Champs requis!",
+                            },
+                          ]}
+                        >
+                          <Select
+                            placeholder="Select a option and change input text above"
+                            // onChange={onGenderChange}
+                            allowClear
+                          >
+                            <Option value="male">male</Option>
+                            <Option value="female">female</Option>
+                            <Option value="other">other</Option>
+                          </Select>
+                        </Form.Item>
+
+                        {/* <Row>
                           <Space>
                             <Form.Item
                               label="fichier CNI"
@@ -218,7 +254,7 @@ export function RegisterPage() {
                               </Upload>
                             </Form.Item>
                           </Space>
-                        </Row>
+                        </Row> */}
                       </Col>
                     </Row>
 
@@ -233,167 +269,6 @@ export function RegisterPage() {
             </div>
           </Col>
         </Row>
-
-        {/* <div className="section">
-          <Row>
-            <Col lg={12}>
-              <div className="blc-left">
-                <h1>INFORMATION</h1>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Maxime mollitia, molestiae quas vel sint commodi repudiandae
-                  consequuntur voluptatum laborum numquam blanditiis harum
-                  quisquam eius sed odit fugiat iusto fuga praesentium optio,
-                  eaque rerum! Provident similique accusantium nemo autem.
-                  Veritatis obcaecati tenetur iure eius earum ut molestias
-                  architecto voluptate aliquam nihil, eveniet aliquid
-                </p>
-              </div>
-            </Col>
-            <Col lg={12}>
-              <div className="blc-right">
-                <h1>INSCRIPTION</h1>
-                <Form
-                  name="basic"
-                  layout="vertical"
-                  onFinish={onFinish}
-                  onFinishFailed={onFinishFailed}
-                  autoComplete="off"
-                >
-                  <Form.Item
-                    label="Prénom"
-                    name="username"
-                    rules={[
-                      {
-                        required: true,
-                        message: "Champs requis!",
-                      },
-                    ]}
-                  >
-                    <Input />
-                  </Form.Item>
-
-                  <Form.Item
-                    label="Prénom"
-                    name="username"
-                    rules={[
-                      {
-                        required: true,
-                        message: "Champs requis!",
-                      },
-                    ]}
-                  >
-                    <Input />
-                  </Form.Item>
-
-                  <Form.Item
-                    label="Prénom"
-                    name="username"
-                    rules={[
-                      {
-                        required: true,
-                        message: "Champs requis!",
-                      },
-                    ]}
-                  >
-                    <Input />
-                  </Form.Item>
-
-                  <Form.Item
-                    label="Prénom"
-                    name="username"
-                    rules={[
-                      {
-                        required: true,
-                        message: "Champs requis!",
-                      },
-                    ]}
-                  >
-                    <Input />
-                  </Form.Item>
-                  <Form.Item
-                    label="Prénom"
-                    name="username"
-                    rules={[
-                      {
-                        required: true,
-                        message: "Champs requis!",
-                      },
-                    ]}
-                  >
-                    <Input />
-                  </Form.Item>
-                  <Form.Item
-                    label="Prénom"
-                    name="username"
-                    rules={[
-                      {
-                        required: true,
-                        message: "Champs requis!",
-                      },
-                    ]}
-                  >
-                    <Input />
-                  </Form.Item>
-                  <Form.Item
-                    label="Prénom"
-                    name="username"
-                    rules={[
-                      {
-                        required: true,
-                        message: "Champs requis!",
-                      },
-                    ]}
-                  >
-                    <Input />
-                  </Form.Item>
-                  <Form.Item
-                    label="Prénom"
-                    name="username"
-                    rules={[
-                      {
-                        required: true,
-                        message: "Champs requis!",
-                      },
-                    ]}
-                  >
-                    <Input />
-                  </Form.Item>
-                  <Form.Item
-                    label="Prénom"
-                    name="username"
-                    rules={[
-                      {
-                        required: true,
-                        message: "Champs requis!",
-                      },
-                    ]}
-                  >
-                    <Input />
-                  </Form.Item>
-                  <Form.Item
-                    label="Prénom"
-                    name="username"
-                    rules={[
-                      {
-                        required: true,
-                        message: "Champs requis!",
-                      },
-                    ]}
-                  >
-                    <Input />
-                  </Form.Item>
-
-                  <Form.Item>
-                    <Button type="primary" htmlType="submit">
-                      Valider
-                    </Button>
-                  </Form.Item>
-                </Form>
-              </div>
-            </Col>
-          </Row>
-        </div> */}
       </div>
     </>
   );
