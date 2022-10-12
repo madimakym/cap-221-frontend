@@ -6,8 +6,8 @@ export const userApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: API_ROOT }),
   tagTypes: ["User"],
   endpoints: (builder) => ({
-    fetchRepos: builder.query({
-      query: (username) => `/users/${username}/repos?type=all&sort=updated/`,
+    fetchUser: builder.query({
+      query: () => `/api/v1/user/`,
       providesTags: ["User"],
     }),
 
@@ -22,4 +22,4 @@ export const userApi = createApi({
   }),
 });
 
-export const { useFetchReposQuery, useRegisterMutation } = userApi;
+export const { useFetchUserQuery, useRegisterMutation } = userApi;

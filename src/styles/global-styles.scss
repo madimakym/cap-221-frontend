@@ -56,10 +56,13 @@ p {
         }
 
         form {
-            input {
+
+            input,
+            .ant-form-item-control-input {
                 width: 100%;
                 display: block;
                 padding: .375rem .75rem;
+                border-radius: .25rem;
                 font-size: 1rem;
                 font-weight: 400;
                 line-height: 1.5;
@@ -69,11 +72,26 @@ p {
                 -webkit-appearance: none;
                 -moz-appearance: none;
                 appearance: none;
-                border-radius: .25rem;
                 transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
             }
         }
 
+        .ant-form-item-control-input {
+            width: 100%;
+            display: block;
+            padding: .375rem .75rem;
+            border-radius: .25rem;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #ced4da;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        }
         .repos {
             .repos-item {
                 margin-bottom: 5px;
