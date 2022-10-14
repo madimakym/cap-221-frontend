@@ -126,11 +126,37 @@ export function RegisterPage() {
         <Row>
           <Col lg={8}>
             <div className="blc-left">
-              <img
-                src="assets/img/cap221-logo.png"
-                className="logo"
-                alt="cap221"
-              />
+              <div>
+                <img
+                  src="assets/img/cap221-logo.png"
+                  className="logo"
+                  alt="cap221"
+                />
+                <p>
+                  Vous êtes 3.765.923 de jeunes garçons et filles hors main
+                  d’œuvre potentielle et inactifs. Aidez nous à vous recenser et
+                  à vous orienter. <br />
+                  <br />
+                  <span style={{ color: "green" }}>Jàng Ligeey Tekki</span> est
+                  une plateforme d’orientation professionnelle pour découvrir et
+                  te former aux métiers d’aujourd’hui et de demain.
+                  <br /> <br />
+                  <span style={{ color: "#f5d200" }}>
+                    Jàng Ligeey Tekki
+                  </span>{" "}
+                  est un moteur de recherche pour booster ta carrière en
+                  développant des compétences très recherchées sur le marché de
+                  l’emploi.
+                  <br /> <br />
+                  <span style={{ color: "red" }}> Jàng Ligeey Tekki</span>{" "}
+                  t’offre plus de 750 Métiers pour ton indépendance et ton
+                  épanouissement en découvrant le métier de tes rêves.
+                  <br /> <br />
+                  <span>
+                    <em>Notre objectif : Un métier pour tous !</em>
+                  </span>
+                </p>
+              </div>
             </div>
           </Col>
           <Col lg={16}>
