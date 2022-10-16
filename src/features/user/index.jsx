@@ -13,14 +13,14 @@ import {
 } from "antd";
 import { Helmet } from "react-helmet-async";
 import { UploadOutlined } from "@ant-design/icons";
-// import moment from "moment";
-import "moment/locale/fr";
 import locale from "antd/es/date-picker/locale/fr_FR";
 import "./styles/style.scss";
 import { useRegisterMutation } from "./service/user-api";
 import { useFetchByGroupeMutation } from "../metier/service/metier-api";
 import { API_ROOT } from "../../utils/global-var";
 import SuccessDialog from "../../components/success";
+import "moment/locale/fr";
+
 const { Option } = Select;
 
 const secteur_metiers = [

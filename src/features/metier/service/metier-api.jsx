@@ -19,7 +19,20 @@ export const metierApi = createApi({
       }),
       invalidatesTags: ["Metier"],
     }),
+
+    createMetier: builder.mutation({
+      query: (payload) => ({
+        url: `/api/v1/metier/`,
+        method: "POST",
+        body: payload,
+      }),
+      invalidatesTags: ["Metier"],
+    }),
   }),
 });
 
-export const { useFetchMetierQuery, useFetchByGroupeMutation } = metierApi;
+export const {
+  useFetchMetierQuery,
+  useFetchByGroupeMutation,
+  useCreateMetierMutation,
+} = metierApi;

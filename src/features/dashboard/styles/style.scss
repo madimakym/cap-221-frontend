@@ -1,0 +1,34 @@
+.home-page {
+
+    .ant-card {
+        padding: 10px;
+        box-shadow: 0 6px 38px #00000008,
+            0 10px 12px #0000000a;
+
+        a {
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+    }
+
+    .ant-card-head-title {
+        font-weight: 600;
+        font-size: 15px;
+        text-transform: uppercase;
+    }
+
+    .ant-card-body {
+        font-size: 30px;
+        font-weight: 500;
+
+        h4 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: auto;
+        }
+    }
+
+    .ant-table-thead>tr>th {
+        font-weight: 700;
+    }
+}

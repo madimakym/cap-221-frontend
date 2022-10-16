@@ -1,0 +1,109 @@
+@import 'antd/dist/antd.css';
+
+.ant-layout-sider {
+    height: 1000px;
+    background-color: var(--primary-color);
+    max-width: 250px !important;
+    min-width: 250px !important;
+    width: 250px !important;
+}
+
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+    background-color: #f0f2f524;
+}
+
+.ant-menu-vertical .ant-menu-item::after,
+.ant-menu-vertical-left .ant-menu-item::after,
+.ant-menu-vertical-right .ant-menu-item::after,
+.ant-menu-inline .ant-menu-item::after {
+    border-right: 3px solid var(--yellow-color);
+}
+
+.ant-menu-inline,
+.ant-menu-vertical,
+.ant-menu-vertical-left {
+    border-right: 1px solid #5a1310;
+}
+
+.ant-menu-item a {
+    color: #ffffffbf;
+    font-size: 18px;
+}
+
+.ant-menu {
+    background-color: var(--primary-color);
+}
+
+.ant-menu-item-selected a,
+.ant-menu-item-selected a:hover {
+    color: white;
+}
+
+.ant-menu-item a:hover {
+    color: white;
+}
+
+.logo {
+    font-size: 26px;
+    font-weight: 600;
+    color: white;
+    border-bottom: 1px solid gray;
+    margin: 5px;
+    text-align: center;
+    padding: 9px;
+    margin-left: 4px;
+    margin-right: 3px;
+    margin-top: 2px;
+
+    img {
+        width: 64%;
+    }
+}
+
+.avatar {
+    display: flex;
+    padding-top: 40px;
+    padding-left: 20px;
+    padding-bottom: 10px;
+
+    img {
+        border-radius: 100%;
+        height: 40px;
+        width: 40px;
+        margin-right: 10px;
+    }
+
+    p {
+        margin: auto;
+        font-size: 15px;
+    }
+}
+
+.icon {
+    width: 25px;
+    margin-right: 10px;
+}
+
+.solde {
+    padding-left: 20px;
+    padding-bottom: 10px;
+}
+
+.account-status {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+
+    .ant-alert-message {
+        color: #c80000;
+        font-weight: 700;
+    }
+}
+
+.logout-link {
+    color: #ffffffbf;
+}
+
+.default-item {
+    margin-left: 8px;
+}
