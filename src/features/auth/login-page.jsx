@@ -21,19 +21,23 @@ export function LoginPage() {
 
   const onFinish = (values) => {
     setIsLoading(true);
-    const data = { ...values, role: "admin" };
-    authlogin(data)
+    authlogin(values)
       .unwrap()
       .then((res) => {
-        console.log("res:", res);
         saveTokenState(res.access_token);
         dispatch(setToken(res.access_token));
         authFetchToken()
           .unwrap()
           .then((res) => {
-            setIsLoading(false);
-            dispatch(setUser(res));
-            navigate("/dashboard");
+            if (res.role === "admin") {
+              setIsLoading(false);
+              dispatch(setUser(res));
+              navigate("/dashboard");
+            } else {
+              setError("Cet utilisateur n'existe pas!");
+              setIsLoading(false);
+              setIsError(true);
+            }
           })
           .catch((error) => {
             setError(error.data.message);
@@ -55,7 +59,7 @@ export function LoginPage() {
         <Form
           name="basic"
           layout="vertical"
-          initialValues={{ email: "makymadi@gmail.com", password: "passer" }}
+          initialValues={{ email: "", password: "" }}
           onFinish={onFinish}
           autoComplete="off"
         >

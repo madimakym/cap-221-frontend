@@ -47,19 +47,19 @@ export function HomePage() {
 
         <Col lg={6} xs={24}>
           <Card size="small" title="Ayant bénéficiés de formation">
-            <h4>23</h4>
+            <h4>0</h4>
           </Card>
         </Col>
 
         <Col lg={6} xs={24}>
           <Card size="small" title="Hommes" className="blc-hairdresser">
-            <h4>123</h4>
+            <h4>0</h4>
           </Card>
         </Col>
 
         <Col lg={6} xs={24}>
           <Card size="small" title="Femmes" className="blc-hairdresser">
-            <h4>123</h4>
+            <h4>0</h4>
           </Card>
         </Col>
       </Row>

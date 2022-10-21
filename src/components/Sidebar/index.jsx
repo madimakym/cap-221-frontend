@@ -12,7 +12,7 @@ export function Sidebar() {
   const location = useLocation();
 
   const handleLogout = () => {
-    navigate("/");
+    navigate("/login");
   };
 
   return (
