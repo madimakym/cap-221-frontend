@@ -28,6 +28,15 @@ export const metierApi = createApi({
       }),
       invalidatesTags: ["Metier"],
     }),
+
+    deleteMetier: builder.mutation({
+      query: (payload) => ({
+        url: `/api/v1/metier/${payload}`,
+        method: "DELETE",
+        body: payload,
+      }),
+      invalidatesTags: ["Metier"],
+    }),
   }),
 });
 
@@ -35,4 +44,5 @@ export const {
   useFetchMetierQuery,
   useFetchByGroupeMutation,
   useCreateMetierMutation,
+  useDeleteMetierMutation,
 } = metierApi;

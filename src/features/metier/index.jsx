@@ -1,7 +1,17 @@
 import React, { useState } from "react";
-import { Card, Table, Button, Form, Input, Select, Alert } from "antd";
+import {
+  Card,
+  Table,
+  Button,
+  Form,
+  Input,
+  Select,
+  Alert,
+  Popconfirm,
+} from "antd";
 import {
   useCreateMetierMutation,
+  useDeleteMetierMutation,
   useFetchMetierQuery,
 } from "./service/metier-api";
 const { Option } = Select;
@@ -16,9 +26,17 @@ const secteur_metiers = [
 export function MetierPage() {
   const metiers = useFetchMetierQuery();
   const [isLoading, setIsLoading] = useState(false);
+  const [deleteMetier] = useDeleteMetierMutation();
   const [error, setError] = useState(false);
   const [createMetier] = useCreateMetierMutation();
   const [form] = Form.useForm();
+
+  const handleDelete = (id) => {
+    deleteMetier(id)
+      .unwrap()
+      .then(() => {})
+      .catch((error) => console.log("error ===>", error));
+  };
 
   const columns = [
     {
@@ -33,6 +51,22 @@ export function MetierPage() {
       dataIndex: "groupe",
       key: "groupe",
       render: (text) => <span>{text}</span>,
+    },
+
+    {
+      title: "Action",
+      key: "action",
+      width: 300,
+      render: (record) => (
+        <Popconfirm
+          title="Voulez-vous supprimer ?"
+          onConfirm={() => handleDelete(record.id)}
+        >
+          <Button type="primary" size="small" danger>
+            Delete
+          </Button>
+        </Popconfirm>
+      ),
     },
   ];
 
