@@ -11,6 +11,16 @@ export const userApi = createApi({
       providesTags: ["User"],
     }),
 
+    fetchGenre: builder.query({
+      query: (payload) => `/api/v1/user/genre/${payload}`,
+      providesTags: ["User"],
+    }),
+
+    fetchByRegion: builder.query({
+      query: () => `/api/v1/user/region`,
+      providesTags: ["User"],
+    }),
+
     register: builder.mutation({
       query: (payload) => ({
         url: `/api/v1/auth/register/`,
@@ -22,4 +32,9 @@ export const userApi = createApi({
   }),
 });
 
-export const { useFetchUserQuery, useRegisterMutation } = userApi;
+export const {
+  useFetchGenreQuery,
+  useFetchByRegionQuery,
+  useFetchUserQuery,
+  useRegisterMutation,
+} = userApi;

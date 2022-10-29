@@ -251,8 +251,53 @@ export function RegisterPage() {
                         >
                           <Input />
                         </Form.Item>
+
+                        <Form.Item
+                          label="Genre"
+                          name="genre"
+                          rules={[
+                            {
+                              required: true,
+                              message: "Champs requis!",
+                            },
+                          ]}
+                        >
+                          <Select placeholder="" onChange={handleMetier}>
+                            <Option value="homme">Homme</Option>
+                            <Option value="femme">Femme</Option>
+                          </Select>
+                        </Form.Item>
                       </Col>
+
                       <Col lg={12}>
+                        <Form.Item
+                          label="Region"
+                          name="region"
+                          rules={[
+                            {
+                              required: true,
+                              message: "Champs requis!",
+                            },
+                          ]}
+                        >
+                          <Select placeholder="" onChange={handleMetier}>
+                            <Option value="Dakar">Dakar</Option>
+                            <Option value="Diourbel">Diourbel</Option>
+                            <Option value="Fatick">Fatick</Option>
+                            <Option value="Kaffrine">Kaffrine</Option>
+                            <Option value="Kaolack">Kaolack</Option>
+                            <Option value="Kédougou">Kédougou</Option>
+                            <Option value="Kolda">Kolda</Option>
+                            <Option value="Louga">Louga</Option>
+                            <Option value="Matam">Matam</Option>
+                            <Option value="Sédhiou">Sédhiou</Option>
+                            <Option value="St Louis">St Louis</Option>
+                            <Option value="Tambacounda">Tambacounda</Option>
+                            <Option value="Thiès">Thiès</Option>
+                            <Option value="Ziguinchor">Ziguinchor</Option>
+                          </Select>
+                        </Form.Item>
+
                         <Form.Item
                           label="Numéro CNI"
                           name="numero_cni"

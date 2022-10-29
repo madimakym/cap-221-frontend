@@ -1,10 +1,19 @@
 import React from "react";
 import "./styles/style.scss";
 import { Row, Col, Card, Table } from "antd";
-import { useFetchUserQuery } from "../user/service/user-api";
+import {
+  useFetchByRegionQuery,
+  useFetchGenreQuery,
+  useFetchUserQuery,
+} from "../user/service/user-api";
 
 export function HomePage() {
   const users = useFetchUserQuery();
+  const mens = useFetchGenreQuery("homme");
+  const wommens = useFetchGenreQuery("femme");
+  const regions = useFetchByRegionQuery();
+
+  console.log("regions:", regions.data);
 
   const columns = [
     {
@@ -34,6 +43,36 @@ export function HomePage() {
       key: "metier",
       render: (text) => <span>{text}</span>,
     },
+
+    {
+      title: "Genre",
+      dataIndex: "genre",
+      key: "genre",
+      render: (text) => <span>{text}</span>,
+    },
+
+    {
+      title: "Region",
+      dataIndex: "region",
+      key: "region",
+      render: (text) => <span>{text}</span>,
+    },
+  ];
+
+  const columns2 = [
+    {
+      title: "Region",
+      dataIndex: "region",
+      key: "region",
+      render: (text) => <span>{text}</span>,
+    },
+
+    {
+      title: "Total",
+      dataIndex: "total",
+      key: "total",
+      render: (text) => <span>{text}</span>,
+    },
   ];
 
   return (
@@ -53,13 +92,13 @@ export function HomePage() {
 
         <Col lg={6} xs={24}>
           <Card size="small" title="Hommes" className="blc-hairdresser">
-            <h4>0</h4>
+            <h4>{mens.data}</h4>
           </Card>
         </Col>
 
         <Col lg={6} xs={24}>
           <Card size="small" title="Femmes" className="blc-hairdresser">
-            <h4>0</h4>
+            <h4>{wommens.data}</h4>
           </Card>
         </Col>
       </Row>
@@ -68,6 +107,13 @@ export function HomePage() {
       <Card size="small" title="Total d'inscrits">
         {users && users.isSuccess && (
           <Table columns={columns} dataSource={users.data} />
+        )}
+      </Card>
+      <br />
+      <br />
+      <Card size="small" title="Total d'inscrits par region">
+        {regions && regions.isSuccess && (
+          <Table columns={columns2} dataSource={regions.data} />
         )}
       </Card>
     </div>
