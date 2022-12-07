@@ -1,11 +1,12 @@
 import React from "react";
 import "./styles/style.scss";
-import { Row, Col, Card, Table } from "antd";
+import { Row, Col, Card, Table, Image } from "antd";
 import {
   useFetchByRegionQuery,
   useFetchGenreQuery,
   useFetchUserQuery,
 } from "../user/service/user-api";
+import { API_ROOT } from "../../utils/global-var";
 
 export function HomePage() {
   const users = useFetchUserQuery();
@@ -56,6 +57,26 @@ export function HomePage() {
       dataIndex: "region",
       key: "region",
       render: (text) => <span>{text}</span>,
+    },
+
+    {
+      title: "CV",
+      key: "cv",
+      render: (text) => (
+        <span>
+          <Image width={50} src={`${API_ROOT}/${text.cv}`} />
+        </span>
+      ),
+    },
+
+    {
+      title: "CNI",
+      key: "cni",
+      render: (text) => (
+        <span>
+          <Image width={50} src={`${API_ROOT}/${text.cni}`} />
+        </span>
+      ),
     },
   ];
 
