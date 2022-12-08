@@ -97,7 +97,7 @@ export function HomePage() {
   return (
     <div className="home-page">
       <Row gutter={24}>
-        <Col lg={24} xs={24}>
+        <Col lg={6} xs={24}>
           <Card size="small" title="Total d'inscrits">
             {users && users.isSuccess && <h4>{users.data.length}</h4>}
           </Card>
