@@ -4,7 +4,6 @@ import {
   Row,
   Button,
   Space,
-  DatePicker,
   Form,
   Input,
   Select,
@@ -13,7 +12,7 @@ import {
 } from "antd";
 import { Helmet } from "react-helmet-async";
 import { UploadOutlined } from "@ant-design/icons";
-import locale from "antd/es/date-picker/locale/fr_FR";
+// import locale from "antd/es/date-picker/locale/fr_FR";
 import "./styles/style.scss";
 import { useRegisterMutation } from "./service/user-api";
 import { useFetchByGroupeMutation } from "../metier/service/metier-api";
@@ -31,7 +30,7 @@ const secteur_metiers = [
 ];
 
 export function RegisterPage() {
-  const [date, setDate] = useState();
+  // const [date, setDate] = useState();
   const [isSuccess, setIsSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [metiers, setMetiers] = useState([]);
@@ -43,7 +42,7 @@ export function RegisterPage() {
   const onFinish = (values) => {
     const data = {
       ...values,
-      dob: date,
+      // dob: date,
       password: "passer",
       role: "user",
       cv: values.cv.file.name,
@@ -64,11 +63,11 @@ export function RegisterPage() {
       });
   };
 
-  const handleChangeDate = (date, dateString) => {
-    console.log("ddateStringata:", dateString);
-    console.log("date:", date);
-    setDate(dateString);
-  };
+  // const handleChangeDate = (date, dateString) => {
+  //   console.log("ddateStringata:", dateString);
+  //   console.log("date:", date);
+  //   setDate(dateString);
+  // };
 
   const handleMetier = (value) => {
     fetchByGroupe({ groupe: value })
@@ -220,6 +219,19 @@ export function RegisterPage() {
                           <Input />
                         </Form.Item>
 
+                        <Form.Item
+                          label="Age"
+                          name="dob"
+                          rules={[
+                            {
+                              required: true,
+                              message: "Champs requis!",
+                            },
+                          ]}
+                        >
+                          <Input />
+                        </Form.Item>
+                        {/* 
                         <Form.Item label="Date de naissance" name="dob">
                           <Space
                             direction="vertical"
@@ -237,7 +249,7 @@ export function RegisterPage() {
                               onChange={handleChangeDate}
                             />
                           </Space>
-                        </Form.Item>
+                        </Form.Item> */}
 
                         <Form.Item
                           label="Email"

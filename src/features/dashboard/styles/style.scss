@@ -31,4 +31,24 @@
     .ant-table-thead>tr>th {
         font-weight: 700;
     }
+
+
+    table {
+        width: 100%;
+        text-align: justify;
+
+        th {
+            font-weight: 600;
+            font-size: 15px;
+            text-transform: uppercase;
+        }
+
+        td {
+            font-size: 15px;
+
+            .ant-tag {
+                font-size: 15px;
+            }
+        }
+    }
 }

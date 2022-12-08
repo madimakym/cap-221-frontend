@@ -1,20 +1,18 @@
 import React from "react";
-import "./styles/style.scss";
-import { Row, Col, Card, Table, Image } from "antd";
+import { Row, Col, Card, Table, Image, Tag } from "antd";
 import {
   useFetchByRegionQuery,
   useFetchGenreQuery,
   useFetchUserQuery,
 } from "../user/service/user-api";
 import { API_ROOT } from "../../utils/global-var";
+import "./styles/style.scss";
 
 export function HomePage() {
   const users = useFetchUserQuery();
   const mens = useFetchGenreQuery("homme");
   const wommens = useFetchGenreQuery("femme");
   const regions = useFetchByRegionQuery();
-
-  console.log("regions:", regions.data);
 
   const columns = [
     {
@@ -99,7 +97,7 @@ export function HomePage() {
   return (
     <div className="home-page">
       <Row gutter={24}>
-        <Col lg={6} xs={24}>
+        <Col lg={24} xs={24}>
           <Card size="small" title="Total d'inscrits">
             {users && users.isSuccess && <h4>{users.data.length}</h4>}
           </Card>
@@ -127,14 +125,66 @@ export function HomePage() {
       <br />
       <Card size="small" title="Total d'inscrits">
         {users && users.isSuccess && (
-          <Table columns={columns} dataSource={users.data} />
+          <Table
+            columns={columns}
+            dataSource={users.data}
+            scroll={{
+              x: "calc(700px + 50%)",
+              y: 240,
+            }}
+          />
         )}
       </Card>
       <br />
       <br />
       <Card size="small" title="Total d'inscrits par region">
         {regions && regions.isSuccess && (
-          <Table columns={columns2} dataSource={regions.data} />
+          <Table
+            columns={columns2}
+            dataSource={regions.data}
+            scroll={{
+              x: "calc(700px + 50%)",
+              y: 240,
+            }}
+          />
+        )}
+      </Card>
+
+      <br />
+      <br />
+      <Card size="small" title="Total d'inscrits par age">
+        {users.data && users.isSuccess && (
+          <table>
+            <tr>
+              <th>Age</th>
+              <th>Total</th>
+            </tr>
+
+            <tr>
+              <td>
+                <Tag>{">"} 25ans </Tag>
+              </td>
+              <td>{users?.data.filter((item) => item.dob < 25).length}</td>
+            </tr>
+            <tr>
+              <td>
+                <Tag>25 - 35 ans </Tag>
+              </td>
+              <td>
+                {
+                  users?.data.filter((item) => item.dob >= 25 && item.dob < 35)
+                    .length
+                }
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <Tag>{">"} 35ans </Tag>
+              </td>
+              <td>{users?.data.filter((item) => item.dob >= 35).length}</td>
+            </tr>
+          </table>
         )}
       </Card>
     </div>
