@@ -1,7 +1,7 @@
 @import 'antd/dist/antd.css';
 
 .ant-layout-sider {
-    height: 1000px;
+    // height: 1000px;
     background-color: var(--primary-color);
     max-width: 250px !important;
     min-width: 250px !important;
@@ -41,6 +41,10 @@
 
 .ant-menu-item a:hover {
     color: white;
+}
+
+.ant-layout-sider-children {
+    height: 100vh;
 }
 
 .logo {

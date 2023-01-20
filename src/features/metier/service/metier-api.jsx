@@ -11,6 +11,11 @@ export const metierApi = createApi({
       providesTags: ["Metier"],
     }),
 
+    fetchOneMetier: builder.query({
+      query: (id) => `/api/v1/metier/${id}`,
+      providesTags: ["Metier"],
+    }),
+
     fetchByGroupe: builder.mutation({
       query: (payload) => ({
         url: `/api/v1/metier/groupe/`,
@@ -43,6 +48,7 @@ export const metierApi = createApi({
 export const {
   useFetchMetierQuery,
   useFetchByGroupeMutation,
+  useFetchOneMetierQuery,
   useCreateMetierMutation,
   useDeleteMetierMutation,
 } = metierApi;

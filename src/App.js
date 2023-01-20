@@ -9,6 +9,8 @@ import HomePage from "./features/dashboard";
 import Sidebar from "./components/Sidebar";
 import TopBar from "./components/TopBar";
 import MetierPage from "./features/metier";
+import MetierCreatePage from "./features/metier/metier-create";
+import MetierEditPage from "./features/metier/metier-edit";
 
 const { Content } = Layout;
 
@@ -24,6 +26,8 @@ function App() {
           <Route element={<PrivateWrapper />}>
             <Route path="/dashboard" element={<HomePage />} />
             <Route path="/metiers" element={<MetierPage />} />
+            <Route path="/metiers/:id" element={<MetierEditPage />} />
+            <Route path="/metiers/create" element={<MetierCreatePage />} />
             {/* <Route path="/user/:role" element={<UserListPage />} />
             <Route path="/appointments" element={<AppointmentList />} />
             <Route path="/orders" element={<OrderList />} />

@@ -61,9 +61,13 @@ export function HomePage() {
       title: "CV",
       key: "cv",
       render: (text) => (
-        <span>
-          <Image width={50} src={`${API_ROOT}/${text.cv}`} />
-        </span>
+        <a href={`${API_ROOT}/${text.cv}`} target="_blank" rel="noreferrer">
+          <Image
+            width={30}
+            src="/assets/img/file-downloald.png"
+            preview={false}
+          />
+        </a>
       ),
     },
 

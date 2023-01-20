@@ -116,3 +116,15 @@ p {
         }
     }
 }
+
+.ant-btn-primary {
+    border-radius: 10px;
+    background: #176638;
+    border: none;
+    text-shadow: 0 -1px 0 rgb(0 0 0 / 12%);
+    box-shadow: 0 2px 0 rgb(0 0 0 / 5%);
+}
+
+.ck-editor__editable {
+    height: 300px;
+}

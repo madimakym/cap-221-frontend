@@ -42,7 +42,7 @@ export function Sidebar() {
           <Menu.Item>
             <span onClick={() => handleLogout()} className="logout-link">
               <LoginOutlined />
-              <span>Deconnexion</span>
+              <span style={{ fontSize: "17px" }}>Deconnexion</span>
             </span>
           </Menu.Item>
         </Menu>
