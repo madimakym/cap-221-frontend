@@ -110,8 +110,33 @@ export function RegisterPage() {
     },
   };
 
+  const handlePay = () => {
+    new PayTech({
+      some_post_data_1: 2, //will be sent to paiement.php page
+      some_post_data_3: 4,
+    })
+      .withOption({
+        requestTokenUrl: "paiement.php",
+        method: "POST",
+        headers: {
+          Accept: "text/html",
+        },
+        prensentationMode: PayTech.OPEN_IN_POPUP,
+        willGetToken: function () {},
+        didGetToken: function (token, redirectUrl) {},
+        didReceiveError: function (error) {},
+        didReceiveNonSuccessResponse: function (jsonResponse) {},
+      })
+      .send();
+
+    //.send params are optional
+  };
+
   return (
     <>
+      <button class="buy" onclick={() => handlePay()} data-item-id="88">
+        Acheter iphone (450000 XOF)
+      </button>
       <Helmet>
         <title>Inscription Page</title>
         <meta name="description" content="CAP221" />

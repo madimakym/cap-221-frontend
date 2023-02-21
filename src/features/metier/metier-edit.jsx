@@ -79,59 +79,61 @@ export function MetierEditPage() {
 
   return (
     <div className="home-page">
-      <Card size="small" title="Ajouter un metier">
-        <Form
-          form={form}
-          name="horizontal_login"
-          onFinish={onFinish}
-          layout="vertical"
-        >
-          <Form.Item
-            label="Secteur"
-            name="groupe"
-            rules={[
-              {
-                required: true,
-                message: "Champs requis!",
-              },
-            ]}
+      <Card size="small" title="Editer un metier">
+        {metier.data && (
+          <Form
+            form={form}
+            name="horizontal_login"
+            onFinish={onFinish}
+            layout="vertical"
           >
-            <Select>
-              {secteur_metiers.map((item, index) => (
-                <Option value={item} key={index}>
-                  {item}
-                </Option>
-              ))}
-            </Select>
-          </Form.Item>
-          <Form.Item
-            label="Metier"
-            name="libelle"
-            rules={[
-              {
-                required: true,
-                message: "Champs requis!",
-              },
-            ]}
-          >
-            <Input type="text" placeholder="" />
-          </Form.Item>
-          <Form.Item label="Description">
-            <CKEditor
-              editor={ClassicEditor}
-              data=""
-              onChange={(event, editor) => {
-                const data = editor.getData();
-                console.log({ event, editor, data });
-              }}
-            />
-          </Form.Item>
-          <Form.Item>
-            <Button type="primary" htmlType="submit" loading={isLoading}>
-              Enregistrer
-            </Button>
-          </Form.Item>
-        </Form>
+            <Form.Item
+              label="Secteur"
+              name="groupe"
+              rules={[
+                {
+                  required: true,
+                  message: "Champs requis!",
+                },
+              ]}
+            >
+              <Select>
+                {secteur_metiers.map((item, index) => (
+                  <Option value={item} key={index}>
+                    {item}
+                  </Option>
+                ))}
+              </Select>
+            </Form.Item>
+            <Form.Item
+              label="Metier"
+              name="libelle"
+              rules={[
+                {
+                  required: true,
+                  message: "Champs requis!",
+                },
+              ]}
+            >
+              <Input type="text" placeholder="" />
+            </Form.Item>
+            <Form.Item label="Description">
+              <CKEditor
+                editor={ClassicEditor}
+                data={metier.data.description}
+                onChange={(event, editor) => {
+                  const data = editor.getData();
+                  console.log({ event, editor, data });
+                }}
+              />
+            </Form.Item>
+            <Form.Item>
+              <Button type="primary" htmlType="submit" loading={isLoading}>
+                Enregistrer
+              </Button>
+            </Form.Item>
+          </Form>
+        )}
         {error && <Alert message={error} type="error" closable />}
       </Card>
     </div>
