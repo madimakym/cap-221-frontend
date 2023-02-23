@@ -1,24 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { Col, Row, Button, Form, Input, Alert } from "antd";
+import React, { useState } from "react";
+import { Col, Row, Button, Form, Input } from "antd";
 import { Helmet } from "react-helmet-async";
-import "./../styles/style.scss";
 import SuccessDialog from "../../../components/success";
 import "moment/locale/fr";
 import { useNavigate } from "react-router-dom";
+import "./../styles/style.scss";
 
 export function GetpaidPage() {
-  const [error, setError] = useState(false);
   const [form] = Form.useForm();
   const navigate = useNavigate();
   const [isOtpForm, setIsOtpForm] = useState(false);
-  const [otpbloc, setOtpbloc] = useState({
-    status: "invisible",
-  });
-  useEffect(() => {
-    console.log(otpbloc);
-  }, [otpbloc]);
 
-  const onFinish = (values) => {
+  const onFinish = () => {
     /*const data = {
           ...values,
           // dob: date,
@@ -30,7 +23,6 @@ export function GetpaidPage() {
     // console.log(values);
   };
 
-  console.log(otpbloc.status);
   return (
     <>
       <Helmet>
@@ -152,7 +144,6 @@ export function GetpaidPage() {
                         </Col>
                       )}
                     </div>
-                    {error && <Alert message={error} type="error" closable />}
                   </Form>
                 </Col>
               </div>
