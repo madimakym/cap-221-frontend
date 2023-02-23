@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useState } from "react";
 import {
   Col,
   Row,
@@ -19,7 +19,6 @@ import { useFetchByGroupeMutation } from "../metier/service/metier-api";
 import { API_ROOT } from "../../utils/global-var";
 import SuccessDialog from "../../components/success";
 import "moment/locale/fr";
-import {useNavigate} from "react-router-dom";
 
 const { Option } = Select;
 
@@ -39,23 +38,17 @@ export function RegisterPage() {
   const [register] = useRegisterMutation();
   const [fetchByGroupe] = useFetchByGroupeMutation();
   const [form] = Form.useForm();
-  const navigate = useNavigate();
 
   const onFinish = (values) => {
-    /*const data = {
+    const data = {
       ...values,
       // dob: date,
       password: "passer",
       role: "user",
       cv: values.cv.file.name,
       cni: values.cni.file.name,
-    };*/
-    console.log(values);
-
-    // 👇 Redirects to about page, note the `replace: true`
-    navigate('/souscription', { replace: true });
-
-    /*setIsLoading(true);
+    };
+    setIsLoading(true);
     register(data)
       .unwrap()
       .then(() => {
@@ -67,7 +60,7 @@ export function RegisterPage() {
         setIsLoading(false);
         setError(error.data.message);
         console.log("error1: ===>", error);
-      });*/
+      });
   };
 
   // const handleChangeDate = (date, dateString) => {
@@ -118,7 +111,7 @@ export function RegisterPage() {
   };
 
   const handlePay = () => {
-    /*new PayTech({
+    new PayTech({
       some_post_data_1: 2, //will be sent to paiement.php page
       some_post_data_3: 4,
     })
@@ -134,13 +127,16 @@ export function RegisterPage() {
         didReceiveError: function (error) {},
         didReceiveNonSuccessResponse: function (jsonResponse) {},
       })
-      .send();*/
+      .send();
 
     //.send params are optional
   };
 
   return (
     <>
+      <button class="buy" onclick={() => handlePay()} data-item-id="88">
+        Acheter iphone (450000 XOF)
+      </button>
       <Helmet>
         <title>Inscription Page</title>
         <meta name="description" content="CAP221" />
@@ -188,7 +184,7 @@ export function RegisterPage() {
             </div>
           </Col>
           <Col lg={16}>
-            <div className="blc-right ">
+            <div className="blc-right">
               <div className="form-content">
                 <Col lg={12}>
                   <h1>INSCRIPTION</h1>
@@ -303,7 +299,7 @@ export function RegisterPage() {
                             },
                           ]}
                         >
-                          <Select placeholder="" /*onChange={handleMetier}*/>
+                          <Select placeholder="" onChange={handleMetier}>
                             <Option value="homme">Homme</Option>
                             <Option value="femme">Femme</Option>
                           </Select>
@@ -321,7 +317,7 @@ export function RegisterPage() {
                             },
                           ]}
                         >
-                          <Select placeholder="" /*onChange={handleMetier}*/>
+                          <Select placeholder="" onChange={handleMetier}>
                             <Option value="Dakar">Dakar</Option>
                             <Option value="Diourbel">Diourbel</Option>
                             <Option value="Fatick">Fatick</Option>
@@ -362,7 +358,7 @@ export function RegisterPage() {
                             },
                           ]}
                         >
-                          <Select placeholder="" /*onChange={handleMetier}*/>
+                          <Select placeholder="" onChange={handleMetier}>
                             {secteur_metiers.map((item, index) => (
                               <Option value={item} key={index}>
                                 {item}
@@ -376,12 +372,12 @@ export function RegisterPage() {
                           label="Metier"
                           rules={[
                             {
-                              required: false,
+                              required: true,
                               message: "Champs requis!",
                             },
                           ]}
                         >
-                          <Select placeholder="" /*onChange={handleMetier}*/>
+                          <Select placeholder="" onChange={handleMetier}>
                             {metiers.map((item, index) => (
                               <Option value={item.libelle} key={index}>
                                 {item.libelle}
@@ -397,7 +393,7 @@ export function RegisterPage() {
                               name="cni"
                               rules={[
                                 {
-                                  required: false,
+                                  required: true,
                                   message: "Champs requis!",
                                 },
                               ]}
@@ -424,7 +420,7 @@ export function RegisterPage() {
                               name="cv"
                               rules={[
                                 {
-                                  required: false,
+                                  required: true,
                                   message: "Champs requis!",
                                 },
                               ]}
@@ -464,8 +460,6 @@ export function RegisterPage() {
                 </Col>
               </div>
             </div>
-
-
           </Col>
         </Row>
       </div>

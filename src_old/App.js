@@ -11,8 +11,6 @@ import TopBar from "./components/TopBar";
 import MetierPage from "./features/metier";
 import MetierCreatePage from "./features/metier/metier-create";
 import MetierEditPage from "./features/metier/metier-edit";
-import {GetpaidPage} from "./features/user/getpaid";
-import {SuccesspaidPage} from "./features/user/success";
 
 const { Content } = Layout;
 
@@ -22,8 +20,6 @@ function App() {
       <HelmetProvider>
         <Routes>
           <Route path="/" element={<RegisterPage />} />
-          <Route path="/souscription" element={<GetpaidPage />} />
-          <Route path="/souscription-effectuee" element={<SuccesspaidPage />} />
           <Route path="/users" element={<ListPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="*" element={<NotFoundPage />} />
