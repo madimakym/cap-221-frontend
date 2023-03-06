@@ -39,6 +39,20 @@ export function Sidebar() {
             </NavLink>
           </Menu.Item>
 
+          <Menu.Item key="/articles">
+            <NavLink to={"/articles"}>
+              <MenuOutlined />
+              <span>Articles</span>
+            </NavLink>
+          </Menu.Item>
+
+          <Menu.Item key="/articles-vue-client">
+            <NavLink to={"/articles-vue-client"}>
+              <MenuOutlined />
+              <span>Articles vue client</span>
+            </NavLink>
+          </Menu.Item>
+
           <Menu.Item>
             <span onClick={() => handleLogout()} className="logout-link">
               <LoginOutlined />

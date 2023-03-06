@@ -13,6 +13,9 @@ import MetierCreatePage from "./features/metier/metier-create";
 import MetierEditPage from "./features/metier/metier-edit";
 import {GetpaidPage} from "./features/user/getpaid";
 import {SuccesspaidPage} from "./features/user/success";
+import ArticleCreatePage from "./features/article/article-create";
+import ArticlePage from "./features/article";
+import ArticleVueClientPage from "./features/article/article-vue-client";
 
 const { Content } = Layout;
 
@@ -30,8 +33,12 @@ function App() {
           <Route element={<PrivateWrapper />}>
             <Route path="/dashboard" element={<HomePage />} />
             <Route path="/metiers" element={<MetierPage />} />
+            <Route path="/articles" element={<ArticlePage />} />
+            <Route path="/articles-vue-client" element={<ArticleVueClientPage />} />
             <Route path="/metiers/:id" element={<MetierEditPage />} />
             <Route path="/metiers/create" element={<MetierCreatePage />} />
+            <Route path="/articles/create" element={<ArticleCreatePage />} />
+            <Route path="/articles/create/:id" element={<ArticleCreatePage />} />
             {/* <Route path="/user/:role" element={<UserListPage />} />
             <Route path="/appointments" element={<AppointmentList />} />
             <Route path="/orders" element={<OrderList />} />
