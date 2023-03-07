@@ -34,7 +34,7 @@ function App() {
             <Route path="/dashboard" element={<HomePage />} />
             <Route path="/metiers" element={<MetierPage />} />
             <Route path="/articles" element={<ArticlePage />} />
-            <Route path="/articles-vue-client" element={<ArticleVueClientPage />} />
+            <Route path="/articles-vue-client/:name" element={<ArticleVueClientPage />} />
             <Route path="/metiers/:id" element={<MetierEditPage />} />
             <Route path="/metiers/create" element={<MetierCreatePage />} />
             <Route path="/articles/create" element={<ArticleCreatePage />} />

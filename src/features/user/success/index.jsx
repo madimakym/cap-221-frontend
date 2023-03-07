@@ -6,6 +6,7 @@ import { Helmet } from "react-helmet-async";
 import "./../styles/style.scss";
 import SuccessDialog from "../../../components/success";
 import "moment/locale/fr";
+import {NavLink} from "react-router-dom";
 
 
 export function SuccesspaidPage(){
@@ -61,8 +62,10 @@ export function SuccesspaidPage(){
                     <div className="blc-right " >
                         <div className="form-content">
                             <Col lg={12}  offset={6}>
-                                <h1>PAIEMENT ÉFFECTUÉ</h1>
-
+                                <h1>PAIEMENT ÉFFECTUÉ & COMPTE ENREGISTRE</h1>
+                                    <NavLink to={"/login"}>
+                                        connectez-vous!
+                                    </NavLink>
                             </Col>
                         </div>
                     </div>

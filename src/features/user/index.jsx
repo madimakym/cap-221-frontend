@@ -19,6 +19,7 @@ import { API_ROOT } from "../../utils/global-var";
 import SuccessDialog from "../../components/success";
 import { useNavigate } from "react-router-dom";
 import "moment/locale/fr";
+import {useRegisterCheckMutation} from "./service/user-api";
 
 const { Option } = Select;
 
@@ -34,36 +35,33 @@ export function RegisterPage() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [metiers, setMetiers] = useState([]);
+  const [registerCheck] = useRegisterCheckMutation();
   const [error, setError] = useState(false);
-  // const [register] = useRegisterMutation();
   const [fetchByGroupe] = useFetchByGroupeMutation();
   const [form] = Form.useForm();
   const navigate = useNavigate();
 
   const onFinish = (values) => {
-    navigate("/souscription", { replace: true });
-    
-    // const data = {
-    //   ...values,
-    //   // dob: date,
-    //   password: "passer",
-    //   role: "user",
-    //   cv: values.cv.file.name,
-    //   cni: values.cni.file.name,
-    // };
-    // setIsLoading(true);
-    // register(data)
-    //   .unwrap()
-    //   .then(() => {
-    //     setIsLoading(false);
-    //     setIsSuccess(true);
-    //     form.resetFields();
-    //   })
-    //   .catch((error) => {
-    //     setIsLoading(false);
-    //     setError(error.data.message);
-    //     console.log("error1: ===>", error);
-    //   });
+     const data = {
+       ...values,
+        dob: new Date(),
+       role: "user",
+       cv: values.cv.file.name,
+       cni: values.cni.file.name,
+     };
+     setIsLoading(true);
+     registerCheck(data)
+       .unwrap()
+       .then((res) => {
+         setIsLoading(false);
+         localStorage.setItem("userToAdd", JSON.stringify(data));
+         navigate("/souscription", { replace: true });
+       })
+       .catch((error) => {
+         setIsLoading(false);
+         setError(error.data.message);
+         console.log("error1: ===>", error);
+       });
   };
 
   const handleMetier = (value) => {
@@ -276,6 +274,38 @@ export function RegisterPage() {
                             <Option value="homme">Homme</Option>
                             <Option value="femme">Femme</Option>
                           </Select>
+                        </Form.Item>
+
+
+                        <Form.Item
+                            label="Mot de passe"
+                            name="password"
+                            onChange={() => form.validateFields(['password2'])}
+                            rules={[
+                              {
+                                required: true,
+                                message: "Champs requis!",
+                              },
+                            ]}
+                        >
+                          <Input.Password />
+                        </Form.Item>
+
+
+                        <Form.Item
+                            label="Confirmer le mot de passe"
+                            name="password2"
+                            rules={[
+                              {
+                                validator: (_, value) =>
+                                    value === form.getFieldValue('password')
+                                        ? Promise.resolve()
+                                        : Promise.reject(new Error('Les mots de passe doivent être identiques')),
+                                dependencies: ['password'],
+                              },
+                            ]}
+                        >
+                          <Input.Password />
                         </Form.Item>
                       </Col>
 

@@ -29,6 +29,15 @@ export const userApi = createApi({
       }),
       invalidatesTags: ["User"],
     }),
+
+    registerCheck: builder.mutation({
+      query: (payload) => ({
+        url: `/api/v1/auth/register/check/`,
+        method: "POST",
+        body: payload,
+      }),
+      invalidatesTags: ["User"],
+    }),
   }),
 });
 
@@ -37,4 +46,5 @@ export const {
   useFetchByRegionQuery,
   useFetchUserQuery,
   useRegisterMutation,
+  useRegisterCheckMutation,
 } = userApi;

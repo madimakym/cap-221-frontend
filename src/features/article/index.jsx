@@ -4,12 +4,17 @@ import {
     useDeleteArticleMutation,
     useFetchArticleQuery,
 } from "./service/article-api";
-import { NavLink } from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
+import {getUser} from "../../utils/global-var";
 
 export function ArticlePage() {
     const articles = useFetchArticleQuery();
     const [deleteArticle] = useDeleteArticleMutation();
-
+    const navigate = useNavigate();
+    const userData = getUser();
+    if(userData.role === "user"){
+        navigate("/articles-vue-client");
+    }
     const handleDelete = (id) => {
         deleteArticle(id)
             .unwrap()

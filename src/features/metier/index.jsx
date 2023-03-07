@@ -4,12 +4,17 @@ import {
   useDeleteMetierMutation,
   useFetchMetierQuery,
 } from "./service/metier-api";
-import { NavLink } from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
+import {getUser} from "../../utils/global-var";
 
 export function MetierPage() {
   const metiers = useFetchMetierQuery();
   const [deleteMetier] = useDeleteMetierMutation();
-
+  const navigate = useNavigate();
+  const userData = getUser();
+  if(userData.role === "user"){
+    navigate("/articles-vue-client");
+  }
   const handleDelete = (id) => {
     deleteMetier(id)
       .unwrap()

@@ -5,23 +5,39 @@ import SuccessDialog from "../../../components/success";
 import "moment/locale/fr";
 import { useNavigate } from "react-router-dom";
 import "./../styles/style.scss";
+import {useRegisterMutation} from "../service/user-api";
 
 export function GetpaidPage() {
   const [form] = Form.useForm();
+ const [register] = useRegisterMutation();
+  const userData = localStorage.getItem("userToAdd");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const [isOtpForm, setIsOtpForm] = useState(false);
+  const [wizallNumber, setWizallNumber] = useState("");
 
   const onFinish = () => {
-    /*const data = {
-          ...values,
-          // dob: date,
-          password: "passer",
-          role: "user",
-          cv: values.cv.file.name,
-          cni: values.cni.file.name,
-        };*/
-    // console.log(values);
+    setIsLoading(true);
+    console.log(userData);
+     register(JSON.parse(userData))
+       .unwrap()
+       .then(() => {
+         setIsLoading(false);
+         navigate("/souscription-effectuee");
+       })
+       .catch((error) => {
+         setIsLoading(false);
+         console.log("error1: ===>", error);
+       });
   };
+
+  const saveNumber = () => {
+    setIsOtpForm(true);
+  };
+
+  function handleInputChange(event) {
+    setWizallNumber(event.target.value);
+  }
 
   return (
     <>
@@ -79,7 +95,7 @@ export function GetpaidPage() {
                     name="getpaid"
                     form={form}
                     layout="vertical"
-                    onFinish={onFinish}
+                    onFinish={null}
                   >
                     <div>
                       {!isOtpForm ? (
@@ -96,13 +112,13 @@ export function GetpaidPage() {
                               },
                             ]}
                           >
-                            <Input />
+                            <Input  value={wizallNumber} onChange={handleInputChange} />
                           </Form.Item>
                           <Form.Item>
                             <Button
                               type="primary"
                               htmlType="button"
-                              onClick={() => setIsOtpForm(true)}
+                              onClick={() => saveNumber() }
                               block
                             >
                               Valider
@@ -134,9 +150,10 @@ export function GetpaidPage() {
                               type="primary"
                               htmlType="submit"
                               block
-                              onClick={() =>
-                                navigate("/souscription-effectuee")
+                              onClick={
+                                  onFinish
                               }
+
                             >
                               Payer
                             </Button>

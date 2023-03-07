@@ -5,14 +5,20 @@ import {
   useFetchGenreQuery,
   useFetchUserQuery,
 } from "../user/service/user-api";
-import { API_ROOT } from "../../utils/global-var";
+import {API_ROOT, getUser} from "../../utils/global-var";
 import "./styles/style.scss";
+import {useNavigate} from "react-router-dom";
 
 export function HomePage() {
   const users = useFetchUserQuery();
   const mens = useFetchGenreQuery("homme");
   const wommens = useFetchGenreQuery("femme");
   const regions = useFetchByRegionQuery();
+  const navigate = useNavigate();
+  const userData = getUser();
+  if(userData.role === "user"){
+    navigate("/articles-vue-client");
+  }
 
   const columns = [
     {

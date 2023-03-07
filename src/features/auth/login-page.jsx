@@ -29,11 +29,16 @@ export function LoginPage() {
         authFetchToken()
           .unwrap()
           .then((res) => {
+            console.log()
             if (res.role === "admin") {
               setIsLoading(false);
               dispatch(setUser(res));
               navigate("/dashboard");
-            } else {
+            } else if (res.role === "user") {
+              setIsLoading(false);
+              dispatch(setUser(res));
+              navigate("/articles-vue-client");
+            }else{
               setError("Cet utilisateur n'existe pas!");
               setIsLoading(false);
               setIsError(true);
@@ -55,7 +60,14 @@ export function LoginPage() {
   return (
     <div className="auth-page">
       <div className="auth-content">
-        <h2>Authentification</h2>
+        <div style={{ textAlign: "center"}}>
+          <img
+              src="assets/img/cap221-logo.png"
+              style={{width: "50%"}}
+              alt="cap221"
+          />
+        </div>
+        <h2>Connectez-vous sur CAP 221</h2>
         <Form
           name="basic"
           layout="vertical"

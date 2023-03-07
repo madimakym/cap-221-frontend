@@ -4,3 +4,14 @@ let urls = {
   //production: "https://demo.kimekoif.com",
 };
 export const API_ROOT = urls[process.env.NODE_ENV];
+
+export const getUser = () => {
+   const token = JSON.parse(localStorage.getItem("token"));
+   if (token) {
+      try {
+         return JSON.parse(atob(token.split(".")[1]));
+      } catch (e) {
+         return null;
+      }
+   }
+};

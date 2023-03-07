@@ -7,7 +7,7 @@ export const articleApi = createApi({
     tagTypes: ["Article"],
     endpoints: (builder) => ({
         fetchArticle: builder.query({
-            query: () => `/api/v1/article/`,
+            query: (name) => `/api/v1/article/get/${name}/`,
             providesTags: ["Article"],
         }),
 
