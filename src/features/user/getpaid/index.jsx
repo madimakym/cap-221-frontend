@@ -5,11 +5,11 @@ import SuccessDialog from "../../../components/success";
 import "moment/locale/fr";
 import { useNavigate } from "react-router-dom";
 import "./../styles/style.scss";
-import {useRegisterMutation} from "../service/user-api";
+import { useRegisterMutation } from "../service/user-api";
 
 export function GetpaidPage() {
   const [form] = Form.useForm();
- const [register] = useRegisterMutation();
+  const [register] = useRegisterMutation();
   const userData = localStorage.getItem("userToAdd");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
@@ -19,16 +19,16 @@ export function GetpaidPage() {
   const onFinish = () => {
     setIsLoading(true);
     console.log(userData);
-     register(JSON.parse(userData))
-       .unwrap()
-       .then(() => {
-         setIsLoading(false);
-         navigate("/souscription-effectuee");
-       })
-       .catch((error) => {
-         setIsLoading(false);
-         console.log("error1: ===>", error);
-       });
+    register(JSON.parse(userData))
+      .unwrap()
+      .then(() => {
+        setIsLoading(false);
+        navigate("/souscription-effectuee");
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        console.log("error1: ===>", error);
+      });
   };
 
   const saveNumber = () => {
@@ -112,13 +112,16 @@ export function GetpaidPage() {
                               },
                             ]}
                           >
-                            <Input  value={wizallNumber} onChange={handleInputChange} />
+                            <Input
+                              value={wizallNumber}
+                              onChange={handleInputChange}
+                            />
                           </Form.Item>
                           <Form.Item>
                             <Button
                               type="primary"
                               htmlType="button"
-                              onClick={() => saveNumber() }
+                              onClick={() => saveNumber()}
                               block
                             >
                               Valider
@@ -150,10 +153,8 @@ export function GetpaidPage() {
                               type="primary"
                               htmlType="submit"
                               block
-                              onClick={
-                                  onFinish
-                              }
-
+                              onClick={onFinish}
+                              loading={isLoading}
                             >
                               Payer
                             </Button>

@@ -37,7 +37,7 @@ export function LoginPage() {
             } else if (res.role === "user") {
               setIsLoading(false);
               dispatch(setUser(res));
-              navigate("/articles-vue-client");
+              navigate("/articles-vue-client/TOUS");
             }else{
               setError("Cet utilisateur n'existe pas!");
               setIsLoading(false);
