@@ -1,5 +1,5 @@
 import React from "react";
-import {Card, Table, Button, Popconfirm, Space, List, Row, Col} from "antd";
+import {Card, List, Row, Col} from "antd";
 import {
     useFetchArticleQuery,
 } from "./service/article-api";
@@ -30,6 +30,9 @@ export function ArticleVueClientPage() {
                                         </div>
                                         <Card title={item.title}>
                                             <p className="articleText" dangerouslySetInnerHTML={{ __html: item.description }} />
+                                            <NavLink className="linkClass" to={"/articles/lire-article/"+item.id} state={{article: item}} >
+                                               Lire plus ...
+                                            </NavLink>
                                         </Card>
                                         <div className="articleFooter">
                                             {item.category}
