@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Form, Input, Button, Alert } from "antd";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {
   useAuthFetchTokenMutation,
@@ -29,7 +29,7 @@ export function LoginPage() {
         authFetchToken()
           .unwrap()
           .then((res) => {
-            console.log()
+            console.log();
             if (res.role === "admin") {
               setIsLoading(false);
               dispatch(setUser(res));
@@ -38,7 +38,7 @@ export function LoginPage() {
               setIsLoading(false);
               dispatch(setUser(res));
               navigate("/articles-vue-client/TOUS");
-            }else{
+            } else {
               setError("Cet utilisateur n'existe pas!");
               setIsLoading(false);
               setIsError(true);
@@ -60,11 +60,11 @@ export function LoginPage() {
   return (
     <div className="auth-page">
       <div className="auth-content">
-        <div style={{ textAlign: "center"}}>
+        <div style={{ textAlign: "center" }}>
           <img
-              src="assets/img/cap221-logo.png"
-              style={{width: "50%"}}
-              alt="cap221"
+            src="assets/img/cap221-logo.png"
+            style={{ width: "50%" }}
+            alt="cap221"
           />
         </div>
         <h2>Connectez-vous sur CAP 221</h2>
@@ -102,6 +102,12 @@ export function LoginPage() {
             </Button>
           </Form.Item>
           {isError && error && <Alert message={error} type="error" showIcon />}
+          <div>
+            <span style={{ color: "black" }}>
+              Vous n'avez pas de compte?
+              <Link to={"/"}> Inscription</Link>
+            </span>
+          </div>
         </Form>
       </div>
     </div>

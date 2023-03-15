@@ -16,6 +16,7 @@ import {SuccesspaidPage} from "./features/user/success";
 import ArticleCreatePage from "./features/article/article-create";
 import ArticlePage from "./features/article";
 import ArticleVueClientPage from "./features/article/article-vue-client";
+import ArticleLectureClientPage from "./features/article/article-lecture";
 
 const { Content } = Layout;
 
@@ -39,6 +40,7 @@ function App() {
             <Route path="/metiers/create" element={<MetierCreatePage />} />
             <Route path="/articles/create" element={<ArticleCreatePage />} />
             <Route path="/articles/create/:id" element={<ArticleCreatePage />} />
+            <Route path="/articles/lire-article/:id" element={<ArticleLectureClientPage />} />
             {/* <Route path="/user/:role" element={<UserListPage />} />
             <Route path="/appointments" element={<AppointmentList />} />
             <Route path="/orders" element={<OrderList />} />

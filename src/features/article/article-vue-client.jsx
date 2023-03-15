@@ -1,14 +1,13 @@
 import React from "react";
 import { Card, List, Row, Col } from "antd";
 import { useFetchArticleQuery } from "./service/article-api";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { API_ROOT } from "../../utils/global-var";
 import Sidebar from "./sidebar";
 
 export function ArticleVueClientPage() {
   const { name } = useParams();
   const articles = useFetchArticleQuery(name);
-  console.log(articles);
   return (
     <div className="home-page ArticleList">
       <Row>
@@ -39,6 +38,13 @@ export function ArticleVueClientPage() {
                         className="articleText"
                         dangerouslySetInnerHTML={{ __html: item.description }}
                       />
+                      <NavLink
+                        className="linkClass"
+                        to={"/articles/lire-article/" + item.id}
+                        state={{ article: item }}
+                      >
+                        Lire plus ...
+                      </NavLink>
                     </Card>
                     <div className="articleFooter">{item.category}</div>
                   </div>

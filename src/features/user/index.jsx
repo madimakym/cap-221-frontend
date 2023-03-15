@@ -17,9 +17,9 @@ import "./styles/style.scss";
 import { useFetchByGroupeMutation } from "../metier/service/metier-api";
 import { API_ROOT } from "../../utils/global-var";
 import SuccessDialog from "../../components/success";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "moment/locale/fr";
-import {useRegisterCheckMutation} from "./service/user-api";
+import { useRegisterCheckMutation } from "./service/user-api";
 
 const { Option } = Select;
 
@@ -42,26 +42,26 @@ export function RegisterPage() {
   const navigate = useNavigate();
 
   const onFinish = (values) => {
-     const data = {
-       ...values,
-        dob: new Date(),
-       role: "user",
-       cv: values.cv.file.name,
-       cni: values.cni.file.name,
-     };
-     setIsLoading(true);
-     registerCheck(data)
-       .unwrap()
-       .then((res) => {
-         setIsLoading(false);
-         localStorage.setItem("userToAdd", JSON.stringify(data));
-         navigate("/souscription", { replace: true });
-       })
-       .catch((error) => {
-         setIsLoading(false);
-         setError(error.data.message);
-         console.log("error1: ===>", error);
-       });
+    const data = {
+      ...values,
+      dob: new Date(),
+      role: "user",
+      cv: values.cv.file.name,
+      cni: values.cni.file.name,
+    };
+    setIsLoading(true);
+    registerCheck(data)
+      .unwrap()
+      .then((res) => {
+        setIsLoading(false);
+        localStorage.setItem("userToAdd", JSON.stringify(data));
+        navigate("/souscription", { replace: true });
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        setError(error.data.message);
+        console.log("error1: ===>", error);
+      });
   };
 
   const handleMetier = (value) => {
@@ -104,7 +104,6 @@ export function RegisterPage() {
       console.log("Dropped files", e.dataTransfer.files);
     },
   };
-
 
   return (
     <>
@@ -276,34 +275,36 @@ export function RegisterPage() {
                           </Select>
                         </Form.Item>
 
-
                         <Form.Item
-                            label="Mot de passe"
-                            name="password"
-                            onChange={() => form.validateFields(['password2'])}
-                            rules={[
-                              {
-                                required: true,
-                                message: "Champs requis!",
-                              },
-                            ]}
+                          label="Mot de passe"
+                          name="password"
+                          onChange={() => form.validateFields(["password2"])}
+                          rules={[
+                            {
+                              required: true,
+                              message: "Champs requis!",
+                            },
+                          ]}
                         >
                           <Input.Password />
                         </Form.Item>
 
-
                         <Form.Item
-                            label="Confirmer le mot de passe"
-                            name="password2"
-                            rules={[
-                              {
-                                validator: (_, value) =>
-                                    value === form.getFieldValue('password')
-                                        ? Promise.resolve()
-                                        : Promise.reject(new Error('Les mots de passe doivent être identiques')),
-                                dependencies: ['password'],
-                              },
-                            ]}
+                          label="Confirmer le mot de passe"
+                          name="password2"
+                          rules={[
+                            {
+                              validator: (_, value) =>
+                                value === form.getFieldValue("password")
+                                  ? Promise.resolve()
+                                  : Promise.reject(
+                                      new Error(
+                                        "Les mots de passe doivent être identiques"
+                                      )
+                                    ),
+                              dependencies: ["password"],
+                            },
+                          ]}
                         >
                           <Input.Password />
                         </Form.Item>
@@ -460,6 +461,13 @@ export function RegisterPage() {
                     </Form.Item>
                     {error && <Alert message={error} type="error" closable />}
                   </Form>
+
+                  <div>
+                    <span style={{ color: "white" }}>
+                      Vous avez déjà un compte?
+                      <Link to={"/login"}> Connexion</Link>
+                    </span>
+                  </div>
                 </Col>
               </div>
             </div>

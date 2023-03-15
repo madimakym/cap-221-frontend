@@ -166,7 +166,7 @@ p {
 .ArticleList{
     .article{
         .ant-card-head-title{
-            padding: 0px;
+            padding: 0;
         }
         .ant-card-head{
             min-height: 33px;
@@ -179,9 +179,19 @@ p {
                 width: 100%;
             }
         }
-        .articleText{
-            font-size: 13px;
-            height: 20px;
+        .ant-card-body {
+            padding-left: 24px;
+            padding-right: 24px;
+            padding-top: 14px;
+            padding-bottom: 10px;
+            .articleText{
+                font-size: 13px;
+                height: 100px;
+                overflow: hidden;
+            }
+            .linkClass{
+                font-size: 15px;
+            }
         }
         .articleFooter{
             font-size: 15px;
@@ -190,6 +200,15 @@ p {
             background-color: #494949;
             color: #fff;
         }
+    }
+    .imgHeader{
+        max-height: 450px;
+    }
+    .titleHeader{
+        padding-top: 20px;
+        padding-left: 1px;
+        font-weight: 600;
+        font-size: 3em;
     }
 }
 
