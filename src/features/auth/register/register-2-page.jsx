@@ -1,10 +1,30 @@
 import React, { useState } from "react";
-import { Col, Row, Button, Form, Input, Alert, Select } from "antd";
+import {
+  Col,
+  Row,
+  Button,
+  Form,
+  Input,
+  Alert,
+  Select,
+  Upload,
+  Space,
+} from "antd";
+import { UploadOutlined } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthCheckUserMutation } from "../service/auth-api";
+import { API_ROOT } from "../../../utils/global-var";
+import { useFetchByGroupeMutation } from "../../metier/service/metier-api";
 import "../styles/style.scss";
 
 const { Option } = Select;
+
+const secteur_metiers = [
+  "ADMINISTRATIF-SECRETARIAT",
+  "AERONAUTIQUE",
+  "AGRICULTURE-AGROALIMENTAIRE",
+  "ART ET ARTISANAT",
+];
 
 export function Register1Page() {
   const navigate = useNavigate();
@@ -12,6 +32,8 @@ export function Register1Page() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const [authCheckUser] = useAuthCheckUserMutation();
+  const [fetchByGroupe] = useFetchByGroupeMutation();
+  const [metiers, setMetiers] = useState([]);
 
   const onFinish = async (values) => {
     setIsLoading(true);
@@ -31,6 +53,47 @@ export function Register1Page() {
           setError(error.data.message);
         }
       });
+  };
+
+  const handleMetier = (value) => {
+    fetchByGroupe({ groupe: value })
+      .unwrap()
+      .then((res) => {
+        setMetiers(res);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        setError(error.data.message);
+        console.log("error1: ===>", error);
+      });
+  };
+
+  const propsCNI = {
+    name: "file",
+    multiple: false,
+    action: `${API_ROOT}/api/v1/upload`,
+    onChange(info) {
+      const { status } = info.file;
+      if (status !== "uploading") {
+      }
+    },
+    onDrop(e) {
+      console.log("Dropped files", e.dataTransfer.files);
+    },
+  };
+
+  const propsCV = {
+    name: "file",
+    multiple: false,
+    action: `${API_ROOT}/api/v1/upload`,
+    onChange(info) {
+      const { status } = info.file;
+      if (status !== "uploading") {
+      }
+    },
+    onDrop(e) {
+      console.log("Dropped files", e.dataTransfer.files);
+    },
   };
 
   return (
@@ -85,8 +148,8 @@ export function Register1Page() {
                   <Row gutter={24}>
                     <Col lg={12} xs={12}>
                       <Form.Item
-                        label="Nom"
-                        name="lastname"
+                        label="Region"
+                        name="region"
                         rules={[
                           {
                             required: true,
@@ -94,13 +157,28 @@ export function Register1Page() {
                           },
                         ]}
                       >
-                        <Input placeholder="Nom de famille" />
+                        <Select>
+                          <Option value="Dakar">Dakar</Option>
+                          <Option value="Diourbel">Diourbel</Option>
+                          <Option value="Fatick">Fatick</Option>
+                          <Option value="Kaffrine">Kaffrine</Option>
+                          <Option value="Kaolack">Kaolack</Option>
+                          <Option value="Kédougou">Kédougou</Option>
+                          <Option value="Kolda">Kolda</Option>
+                          <Option value="Louga">Louga</Option>
+                          <Option value="Matam">Matam</Option>
+                          <Option value="Sédhiou">Sédhiou</Option>
+                          <Option value="St Louis">St Louis</Option>
+                          <Option value="Tambacounda">Tambacounda</Option>
+                          <Option value="Thiès">Thiès</Option>
+                          <Option value="Ziguinchor">Ziguinchor</Option>
+                        </Select>
                       </Form.Item>
                     </Col>
                     <Col lg={12} xs={12}>
                       <Form.Item
-                        label="prenom"
-                        name="firstname"
+                        label="Numéro CNI"
+                        name="numero_cni"
                         rules={[
                           {
                             required: true,
@@ -108,38 +186,7 @@ export function Register1Page() {
                           },
                         ]}
                       >
-                        <Input placeholder="Prénom" />
-                      </Form.Item>
-                    </Col>
-                  </Row>
-
-                  <Row gutter={24}>
-                    <Col lg={12} xs={12}>
-                      <Form.Item
-                        label="Téléphone"
-                        name="phone"
-                        rules={[
-                          {
-                            required: true,
-                            message: "Champs requis!",
-                          },
-                        ]}
-                      >
-                        <Input placeholder="Nom de famille" />
-                      </Form.Item>
-                    </Col>
-                    <Col lg={12} xs={12}>
-                      <Form.Item
-                        label="Date de naissance"
-                        name="dob"
-                        rules={[
-                          {
-                            required: true,
-                            message: "Champs requis!",
-                          },
-                        ]}
-                      >
-                        <Input placeholder="Date de naissance" />
+                        <Input />
                       </Form.Item>
                     </Col>
                   </Row>
@@ -147,8 +194,8 @@ export function Register1Page() {
                   <Row gutter={24}>
                     <Col lg={12} xs={12}>
                       <Form.Item
-                        label="Email"
-                        name="email"
+                        label="Secteur d'activités"
+                        name="secteur"
                         rules={[
                           {
                             required: true,
@@ -156,13 +203,20 @@ export function Register1Page() {
                           },
                         ]}
                       >
-                        <Input placeholder="nom@votreemail.com" />
+                        <Select placeholder="" onChange={handleMetier}>
+                          {secteur_metiers.map((item, index) => (
+                            <Option value={item} key={index}>
+                              {item}
+                            </Option>
+                          ))}
+                        </Select>
                       </Form.Item>
                     </Col>
+
                     <Col lg={12} xs={12}>
                       <Form.Item
-                        label="Genre"
-                        name="genre"
+                        name="metier"
+                        label="Metier"
                         rules={[
                           {
                             required: true,
@@ -170,44 +224,86 @@ export function Register1Page() {
                           },
                         ]}
                       >
-                        <Select placeholder="">
-                          <Option value="homme">Homme</Option>
-                          <Option value="femme">Femme</Option>
+                        <Select placeholder="" onChange={handleMetier}>
+                          {metiers.map((item, index) => (
+                            <Option value={item.libelle} key={index}>
+                              {item.libelle}
+                            </Option>
+                          ))}
                         </Select>
                       </Form.Item>
                     </Col>
                   </Row>
+                  <Row>
+                    <Space>
+                      <Form.Item
+                        label="fichier CNI"
+                        name="cni"
+                        rules={[
+                          {
+                            required: true,
+                            message: "Champs requis!",
+                          },
+                        ]}
+                      >
+                        <Upload
+                          {...propsCNI}
+                          style={{
+                            width: "100%",
+                          }}
+                        >
+                          <Button
+                            icon={<UploadOutlined />}
+                            style={{
+                              width: "100%",
+                            }}
+                          >
+                            Click to Upload
+                          </Button>
+                        </Upload>
+                      </Form.Item>
 
-                  <Form.Item
-                    label="Mot de passe"
-                    name="password"
-                    rules={[
-                      {
-                        required: true,
-                        message: "Champs requis!",
-                      },
-                      {
-                        min: 6,
-                        message: "min 6 caractères",
-                      },
-                      {
-                        pattern: /[#?!@$%^&*-]/g,
-                        message: "Veuillez renseigner un caractere special!",
-                      },
-                    ]}
-                  >
-                    <Input.Password placeholder="Définir un mot de passe" />
-                  </Form.Item>
+                      <Form.Item
+                        label="CV"
+                        name="cv"
+                        rules={[
+                          {
+                            required: true,
+                            message: "Champs requis!",
+                          },
+                        ]}
+                      >
+                        <Upload
+                          {...propsCV}
+                          style={{
+                            width: "100%",
+                          }}
+                        >
+                          <Button
+                            icon={<UploadOutlined />}
+                            style={{
+                              width: "100%",
+                            }}
+                          >
+                            Click to Upload
+                          </Button>
+                        </Upload>
+                      </Form.Item>
+                    </Space>
+                  </Row>
 
                   <Form.Item>
-                    <Button
-                      type="primary"
-                      htmlType="submit"
-                      className="btn-lg"
-                      loading={isLoading}
-                    >
-                      Continuer
-                    </Button>
+                    <div className="btn-register">
+                      <Space>
+                        <Button
+                          type="primary"
+                          htmlType="submit"
+                          loading={isLoading}
+                        >
+                          Valider
+                        </Button>
+                      </Space>
+                    </div>
                   </Form.Item>
                 </Form>
                 <p>

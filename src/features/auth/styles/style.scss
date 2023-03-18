@@ -38,18 +38,6 @@
         margin-top: -12px;
     }
 
-    // .blc-left {
-    //     background-color: gray;
-    //     height: 100vh;
-    //     background-repeat: no-repeat;
-    //     background-size: cover;
-    //     padding: 40px;
-
-    //     .logo {
-    //         width: 15%;
-    //     }
-    // }
-
     .blc-left {
         background-color: white;
         height: 100vh;
@@ -78,22 +66,22 @@
     .blc-right {
         .section-1 {
             background-color: var(--primary-color);
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding-bottom: 0px !important;
 
             .blc-content {
-                padding: 250px;
+                width: 600px;
 
                 h1 {
-                    text-align: center;
                     margin-bottom: 2px;
                     color: white;
                 }
 
                 p {
-                    text-align: center;
+                    // text-align: center;
                     color: white;
                 }
 
@@ -114,6 +102,11 @@
 
             .ant-form label {
                 color: white;
+            }
+
+            .btn-register {
+                display: flex;
+                justify-content: flex-end;
             }
         }
 

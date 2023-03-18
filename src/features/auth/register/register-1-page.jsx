@@ -99,7 +99,7 @@ export function Register1Page() {
                     </Col>
                     <Col lg={12} xs={12}>
                       <Form.Item
-                        label="prenom"
+                        label="prénom"
                         name="firstname"
                         rules={[
                           {
@@ -200,14 +200,15 @@ export function Register1Page() {
                   </Form.Item>
 
                   <Form.Item>
-                    <Button
-                      type="primary"
-                      htmlType="submit"
-                      className="btn-lg"
-                      loading={isLoading}
-                    >
-                      Continuer
-                    </Button>
+                    <div className="btn-register">
+                      <Button
+                        type="primary"
+                        htmlType="submit"
+                        loading={isLoading}
+                      >
+                        Continuer
+                      </Button>
+                    </div>
                   </Form.Item>
                 </Form>
                 <p>
