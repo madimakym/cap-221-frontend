@@ -30,7 +30,20 @@ export const authApi = createApi({
       }),
       invalidatesTags: ["Auth"],
     }),
+
+    authCheckUser: builder.mutation({
+      query: (payload) => ({
+        url: "/api/v1/auth/check-user",
+        method: "POST",
+        body: payload,
+      }),
+      invalidatesTags: ["Auth"],
+    }),
   }),
 });
 
-export const { useAuthloginMutation, useAuthFetchTokenMutation } = authApi;
+export const {
+  useAuthloginMutation,
+  useAuthFetchTokenMutation,
+  useAuthCheckUserMutation,
+} = authApi;
