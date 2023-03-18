@@ -3,6 +3,7 @@ import { authApi } from "../features/auth/service/auth-api";
 import authSlice from "../features/auth/service/auth-slice";
 import { metierApi } from "../features/metier/service/metier-api";
 import { userApi } from "../features/user/service/user-api";
+import { wizallApi } from "../features/user/service/wizall-cash-out";
 import {articleApi} from "../features/article/service/article-api";
 
 export default configureStore({
@@ -11,6 +12,7 @@ export default configureStore({
     [userApi.reducerPath]: userApi.reducer,
     [metierApi.reducerPath]: metierApi.reducer,
     [articleApi.reducerPath]: articleApi.reducer,
+    [wizallApi.reducerPath]: wizallApi.reducer,
     auth: authSlice,
   },
   middleware: (getDefaultMiddleware) =>
@@ -18,6 +20,7 @@ export default configureStore({
       authApi.middleware,
       userApi.middleware,
       metierApi.middleware,
+      wizallApi.middleware,
       articleApi.middleware
     ),
 });
