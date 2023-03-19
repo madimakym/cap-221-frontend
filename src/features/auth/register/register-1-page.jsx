@@ -204,6 +204,7 @@ export function Register1Page() {
                       <Button
                         type="primary"
                         htmlType="submit"
+                        className="btn-lg"
                         loading={isLoading}
                       >
                         Continuer

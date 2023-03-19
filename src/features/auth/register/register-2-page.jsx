@@ -11,8 +11,7 @@ import {
   Space,
 } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
-import { Link, useNavigate } from "react-router-dom";
-import { useAuthCheckUserMutation } from "../service/auth-api";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { API_ROOT } from "../../../utils/global-var";
 import { useFetchByGroupeMutation } from "../../metier/service/metier-api";
 import "../styles/style.scss";
@@ -27,44 +26,53 @@ const secteur_metiers = [
 ];
 
 export function Register1Page() {
-  const navigate = useNavigate();
+  const { state } = useLocation();
   const [form] = Form.useForm();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [authCheckUser] = useAuthCheckUserMutation();
   const [fetchByGroupe] = useFetchByGroupeMutation();
   const [metiers, setMetiers] = useState([]);
 
   const onFinish = async (values) => {
-    setIsLoading(true);
-    authCheckUser({ email: values.email })
-      .unwrap()
-      .then(() => {
-        setIsLoading(false);
-        setError("Adresse email existante");
-      })
-      .catch((error) => {
-        if (error.data.message === "Cet utilisateur n'existe pas!") {
-          navigate("/register/2", {
-            state: values,
-          });
-        } else {
-          setIsLoading(false);
-          setError(error.data.message);
-        }
-      });
+    const data = {
+      ...state,
+      role: "user",
+      metier: values.metier,
+      numero_cni: values.numero_cni,
+      region: values.region,
+      secteur: values.secteur,
+      cv: values.cv.file.name,
+      cni: values.cni.file.name,
+    };
+
+    console.log("data:", data);
+
+    // setIsLoading(true);
+    // authCheckUser({ email: values.email })
+    //   .unwrap()
+    //   .then(() => {
+    //     setIsLoading(false);
+    //     setError("Adresse email existante");
+    //   })
+    //   .catch((error) => {
+    //     if (error.data.message === "Cet utilisateur n'existe pas!") {
+    //       navigate("/register/2", {
+    //         state: values,
+    //       });
+    //     } else {
+    //       setIsLoading(false);
+    //       setError(error.data.message);
+    //     }
+    //   });
   };
 
   const handleMetier = (value) => {
     fetchByGroupe({ groupe: value })
       .unwrap()
-      .then((res) => {
-        setMetiers(res);
-      })
+      .then((res) => setMetiers(res))
       .catch((error) => {
         setIsLoading(false);
         setError(error.data.message);
-        console.log("error1: ===>", error);
       });
   };
 
@@ -103,7 +111,7 @@ export function Register1Page() {
           <div className="blc-left">
             <div>
               <img
-                src=".assets/img/cap221-logo.png"
+                src="../assets/img/cap221-logo.png"
                 className="logo"
                 alt="cap221"
               />
@@ -293,23 +301,24 @@ export function Register1Page() {
                   </Row>
 
                   <Form.Item>
-                    <div className="btn-register">
-                      <Space>
-                        <Button
-                          type="primary"
-                          htmlType="submit"
-                          loading={isLoading}
-                        >
-                          Valider
-                        </Button>
-                      </Space>
+                    <div className="btn-register_">
+                      <Button
+                        type="primary"
+                        htmlType="submit"
+                        className="btn-lg"
+                        loading={isLoading}
+                      >
+                        Valider
+                      </Button>
                     </div>
                   </Form.Item>
                 </Form>
-                <p>
-                  Vous avez déjà un compte ?{" "}
-                  <Link to={"/login"}> Se connecter</Link>
-                </p>
+                <div>
+                  <Link to={"/"} className="link-prev">
+                    {" "}
+                    Page précedente
+                  </Link>
+                </div>
                 {error && <Alert message={error} type="error" closable />}
               </div>
             </div>

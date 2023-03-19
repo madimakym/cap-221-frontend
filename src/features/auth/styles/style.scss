@@ -64,6 +64,8 @@
 
 
     .blc-right {
+
+        
         .section-1 {
             background-color: var(--primary-color);
             height: 100vh;
@@ -150,6 +152,10 @@
                     bottom: 10px;
                 }
             }
+        }
+
+        .link-prev{
+            color: var(--secondary-color);
         }
     }
 
