@@ -1,6 +1,6 @@
 import { HelmetProvider } from "react-helmet-async";
 import { BrowserRouter, Route, Routes, Outlet } from "react-router-dom";
-import { RegisterPage } from "./features/user";
+// import { RegisterPage } from "./features/user";
 import { NotFoundPage } from "./features/NotFound";
 import { ListPage } from "./features/user/list";
 import LoginPage from "./features/auth/login-page";
@@ -17,6 +17,8 @@ import ArticleCreatePage from "./features/article/article-create";
 import ArticlePage from "./features/article";
 import ArticleVueClientPage from "./features/article/article-vue-client";
 import ArticleLectureClientPage from "./features/article/article-lecture";
+import Register1Page from "./features/auth/register/register-1-page";
+import Register2Page from "./features/auth/register/register-2-page";
 
 const { Content } = Layout;
 
@@ -25,7 +27,8 @@ function App() {
     <BrowserRouter>
       <HelmetProvider>
         <Routes>
-          <Route path="/" element={<RegisterPage />} />
+          <Route path="/" element={<Register1Page />} />
+          <Route path="/register/2" element={<Register2Page />} />
           <Route path="/souscription" element={<GetpaidPage />} />
           <Route path="/souscription-effectuee" element={<SuccesspaidPage />} />
           <Route path="/users" element={<ListPage />} />

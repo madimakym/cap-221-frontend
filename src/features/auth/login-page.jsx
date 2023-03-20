@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Input, Button, Alert } from "antd";
+import { Col, Row, Button, Form, Input, Alert } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {
@@ -18,6 +18,7 @@ export function LoginPage() {
   const [error, setError] = useState(false);
   const [authlogin] = useAuthloginMutation();
   const [authFetchToken] = useAuthFetchTokenMutation();
+  const [form] = Form.useForm();
 
   const onFinish = (values) => {
     setIsLoading(true);
@@ -29,7 +30,6 @@ export function LoginPage() {
         authFetchToken()
           .unwrap()
           .then((res) => {
-            console.log();
             if (res.role === "admin") {
               setIsLoading(false);
               dispatch(setUser(res));
@@ -58,57 +58,72 @@ export function LoginPage() {
   };
 
   return (
-    <div className="auth-page">
-      <div className="auth-content">
-        <div style={{ textAlign: "center" }}>
-          <img
-            src="assets/img/cap221-logo.png"
-            style={{ width: "50%" }}
-            alt="cap221"
-          />
-        </div>
-        <h2>Connectez-vous sur CAP 221</h2>
-        <Form
-          name="basic"
-          layout="vertical"
-          initialValues={{ email: "", password: "" }}
-          onFinish={onFinish}
-          autoComplete="off"
-        >
-          <Form.Item
-            label="Identifiant"
-            name="email"
-            rules={[{ required: true, message: "Champs requis" }]}
-          >
-            <Input className="form-control" />
-          </Form.Item>
-
-          <Form.Item
-            label="Mot de passe"
-            name="password"
-            rules={[{ required: true, message: "Champs requis" }]}
-          >
-            <Input.Password className="form-control" />
-          </Form.Item>
-
-          <Form.Item>
-            <Button
-              type="primary"
-              htmlType="submit"
-              className="btn btn-lg btn-primary"
-              loading={isLoading}
-            >
-              Connexion
-            </Button>
-          </Form.Item>
-          {isError && error && <Alert message={error} type="error" showIcon />}
-          <div>
-            <span style={{ color: "black" }}>
-              Vous n'avez pas de compte?
-              <Link to={"/"}> Inscription</Link>
-            </span>
-          </div>
-        </Form>
+    <div className="auth-page" data-aos="fade-in">
+      <div className="section-login">
+        <Row>
+          <Col lg={8} offset={8}>
+            <div className="blc-content">
+              <div className="text-align-center">
+                <img
+                  src="assets/img/cap221-logo.png"
+                  style={{ width: "50%" }}
+                  alt="cap221"
+                />
+              </div>
+              <h1>Connexion à votre compte</h1>
+              <div>
+                <Form
+                  name="basic"
+                  form={form}
+                  onFinish={onFinish}
+                  autoComplete="off"
+                  layout="vertical"
+                >
+                  <label>Saisissez votre e-mail</label>
+                  <Form.Item
+                    name="email"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Champs requis!",
+                      },
+                    ]}
+                  >
+                    <Input placeholder="nom@votreemail.com" />
+                  </Form.Item>
+                  <label>Tapez votre mot de passe</label>
+                  <Form.Item
+                    name="password"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Champs requis!",
+                      },
+                    ]}
+                  >
+                    <Input.Password placeholder="Définir un mot de passe" />
+                  </Form.Item>
+                  <Form.Item>
+                    <Button
+                      type="primary"
+                      htmlType="submit"
+                      className="btn-lg"
+                      loading={isLoading}
+                      style={{ fontWeight: "600" }}
+                    >
+                      Se connecter
+                    </Button>
+                  </Form.Item>
+                </Form>
+                <p className="text-align-center">
+                  Vous n’avez pas encore de compte ?
+                  <Link to={"/"}> S’inscrire</Link>
+                </p>
+              </div>
+              {isError && <Alert message={error} type="error" closable />}
+            </div>
+          </Col>
+        </Row>
       </div>
     </div>
   );
