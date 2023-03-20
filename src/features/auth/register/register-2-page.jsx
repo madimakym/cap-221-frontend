@@ -11,10 +11,11 @@ import {
   Space,
 } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { API_ROOT } from "../../../utils/global-var";
 import { useFetchByGroupeMutation } from "../../metier/service/metier-api";
 import "../styles/style.scss";
+import PaiementDialog from "./paiement-dialog";
 
 const { Option } = Select;
 
@@ -29,8 +30,10 @@ export function Register1Page() {
   const { state } = useLocation();
   const [form] = Form.useForm();
   const [isLoading, setIsLoading] = useState(false);
+  const [showPaiementModal, setShowPaiementModal] = useState(false);
   const [error, setError] = useState(false);
   const [fetchByGroupe] = useFetchByGroupeMutation();
+  const [userInfo, setUserInfo] = useState();
   const [metiers, setMetiers] = useState([]);
 
   const onFinish = async (values) => {
@@ -44,26 +47,8 @@ export function Register1Page() {
       cv: values.cv.file.name,
       cni: values.cni.file.name,
     };
-
-    console.log("data:", data);
-
-    // setIsLoading(true);
-    // authCheckUser({ email: values.email })
-    //   .unwrap()
-    //   .then(() => {
-    //     setIsLoading(false);
-    //     setError("Adresse email existante");
-    //   })
-    //   .catch((error) => {
-    //     if (error.data.message === "Cet utilisateur n'existe pas!") {
-    //       navigate("/register/2", {
-    //         state: values,
-    //       });
-    //     } else {
-    //       setIsLoading(false);
-    //       setError(error.data.message);
-    //     }
-    //   });
+    setUserInfo(data);
+    setShowPaiementModal(true);
   };
 
   const handleMetier = (value) => {
@@ -325,6 +310,11 @@ export function Register1Page() {
           </div>
         </Col>
       </Row>
+      <PaiementDialog
+        status={showPaiementModal}
+        user={userInfo}
+        handleCancel={() => setShowPaiementModal(false)}
+      />
     </div>
   );
 }

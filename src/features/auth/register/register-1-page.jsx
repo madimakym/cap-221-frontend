@@ -139,7 +139,7 @@ export function Register1Page() {
                           },
                         ]}
                       >
-                        <Input placeholder="Date de naissance" />
+                        <Input placeholder="DD/MM/YYYY" />
                       </Form.Item>
                     </Col>
                   </Row>

@@ -39,6 +39,15 @@ export const authApi = createApi({
       }),
       invalidatesTags: ["Auth"],
     }),
+
+    authRegister: builder.mutation({
+      query: (payload) => ({
+        url: `/api/v1/auth/register/`,
+        method: "POST",
+        body: payload,
+      }),
+      invalidatesTags: ["Auth"],
+    }),
   }),
 });
 
@@ -46,4 +55,5 @@ export const {
   useAuthloginMutation,
   useAuthFetchTokenMutation,
   useAuthCheckUserMutation,
+  useAuthRegisterMutation
 } = authApi;

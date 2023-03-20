@@ -4,7 +4,7 @@ let urls = {
   production: "https://demo.kimekoif.com",
 };
 export const API_ROOT = urls[process.env.NODE_ENV];
-export const WIZALL_ROOT = urls[process.env.NODE_ENV];
+export const WIZALL_ROOT = "https://agent-api.wizall.com";
 
 export const getUser = () => {
   const token = JSON.parse(localStorage.getItem("token"));
