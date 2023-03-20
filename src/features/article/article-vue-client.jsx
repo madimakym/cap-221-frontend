@@ -34,7 +34,7 @@ export function ArticleVueClientPage() {
                       />
                     </div>
                     <Card title={item.title}>
-                      <p
+                      <div
                         className="articleText"
                         dangerouslySetInnerHTML={{ __html: item.description }}
                       />
