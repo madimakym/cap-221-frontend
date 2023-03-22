@@ -130,7 +130,7 @@ export function Register1Page() {
                     </Col>
                     <Col lg={12} xs={12}>
                       <Form.Item
-                        label="Date de naissance"
+                        label="Age"
                         name="dob"
                         rules={[
                           {
@@ -139,7 +139,7 @@ export function Register1Page() {
                           },
                         ]}
                       >
-                        <Input placeholder="DD/MM/YYYY" />
+                        <Input />
                       </Form.Item>
                     </Col>
                   </Row>
