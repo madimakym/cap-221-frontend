@@ -83,7 +83,6 @@ function PaiementDialog({ status, handleCancel, user }) {
       .then(() => handleRegister())
       .catch((error) => {
         setIsLoading(false);
-        handleRegister();
         setError(error.data.error);
       });
   };
