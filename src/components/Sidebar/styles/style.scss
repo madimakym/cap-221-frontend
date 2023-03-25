@@ -2,14 +2,14 @@
 
 .ant-layout-sider {
     // height: 1000px;
-    background-color: var(--primary-color);
+    background-color: var(--green-color);
     max-width: 250px !important;
     min-width: 250px !important;
     width: 250px !important;
 }
 
 .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
-    background-color: #f0f2f524;
+    background-color: var(--green-color);
 }
 
 .ant-menu-vertical .ant-menu-item::after,
@@ -31,7 +31,7 @@
 }
 
 .ant-menu {
-    background-color: var(--primary-color);
+    background-color: var(--green-color);
 }
 
 .ant-menu-item-selected a,

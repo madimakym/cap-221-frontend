@@ -11,10 +11,7 @@ import {
   Upload,
   Modal,
 } from "antd";
-import {
-  useCreateArticleMutation,
-  useUpdateArticleMutation,
-} from "./service/article-api";
+import { useCreateArticleMutation } from "./service/article-api";
 import { PlusOutlined } from "@ant-design/icons";
 import { useLocation, useNavigate } from "react-router-dom";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
@@ -77,7 +74,6 @@ export function ArticleCreatePage() {
   const [error, setError] = useState(false);
   const [description, setDescription] = useState("");
   const [createArticle] = useCreateArticleMutation();
-  const [updateArticle] = useUpdateArticleMutation();
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [isEditImage, setIsEditImage] = useState(null);
@@ -85,7 +81,6 @@ export function ArticleCreatePage() {
   const [fileList, setFileList] = useState([]);
   const [form] = Form.useForm();
   let articleToEdit = useLocation();
-  console.log(articleToEdit.state);
 
   useEffect(() => {
     if (articleToEdit.state) {
@@ -96,53 +91,21 @@ export function ArticleCreatePage() {
   }, [articleToEdit]);
 
   const onFinish = (values) => {
-    console.log("values:", values);
-    if (articleToEdit.state) {
-      const data = {
-        title: values.title,
-        descripition: values.descripition,
-        category: values.category,
-        image:
-          values.imageArticle.file.response.filename ??
-          articleToEdit.state.article.image,
-        id: articleToEdit.state.article.id,
-      };
-
-      updateArticle(data)
-        .unwrap()
-        .then((res) => {
-          navigate("/articles");
-        })
-        .catch((error) => {
-          setIsLoading(false);
-          setError(error.data.message);
-        });
-    } else {
-      const data = {
-        ...values,
-        description,
-        writer: 5,
-        image: values.imageArticle.file.response.filename,
-      };
-      createArticle(data)
-        .unwrap()
-        .then((res) => {
-          navigate("/articles");
-        })
-        .catch((error) => {
-          setIsLoading(false);
-          setError(error.data.message);
-        });
-      createArticle(data)
-        .unwrap()
-        .then((res) => {
-          navigate("/articles");
-        })
-        .catch((error) => {
-          setIsLoading(false);
-          setError(error.data.message);
-        });
-    }
+    const data = {
+      ...values,
+      description,
+      writer: 5,
+      image: values.imageArticle.file.response.filename,
+    };
+    createArticle(data)
+      .unwrap()
+      .then((res) => {
+        navigate("/articles");
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        setError(error.data.message);
+      });
   };
 
   const handleCancel = () => setPreviewOpen(false);
@@ -162,13 +125,6 @@ export function ArticleCreatePage() {
     setFileList(newFileList);
   };
 
-  const uploadButton = (
-    <div className="addArticleImage">
-      <PlusOutlined />
-      <div className="image">Ajouter une image</div>
-    </div>
-  );
-
   return (
     <div className="home-page">
       <Card size="small" title="Ajouter un article">
@@ -178,7 +134,7 @@ export function ArticleCreatePage() {
           onFinish={onFinish}
           layout="vertical"
         >
-          <Row>
+          <Row gutter={24}>
             <Col lg={17}>
               <Form.Item
                 label="Titre de l'article"
@@ -186,6 +142,19 @@ export function ArticleCreatePage() {
                 initialValue={
                   articleToEdit.state ? articleToEdit.state.article.title : ""
                 }
+                rules={[
+                  {
+                    required: true,
+                    message: "Champs requis!",
+                  },
+                ]}
+              >
+                <Input type="text" placeholder="" />
+              </Form.Item>
+
+              <Form.Item
+                label="Resumé"
+                name="resume"
                 rules={[
                   {
                     required: true,
@@ -210,17 +179,7 @@ export function ArticleCreatePage() {
                   }}
                 />
               </Form.Item>
-              <Form.Item>
-                <Button type="primary" htmlType="submit" loading={isLoading}>
-                  Enregistrer et publier
-                </Button>
-
-                {/*<Button type="link" htmlType="submit" loading={isLoading}>
-                                    Enregistrer sans publier
-                                </Button>*/}
-              </Form.Item>
             </Col>
-            <Col lg={1}> </Col>
             <Col lg={6}>
               <Form.Item
                 label="Image de l'article"
@@ -239,7 +198,7 @@ export function ArticleCreatePage() {
                   onPreview={handlePreview}
                   onChange={handleChange}
                   action={`${API_ROOT}/api/v1/upload`}
-                  className="imageArticleContent"
+                  //
                   accept="image/*"
                   multiple={false}
                 >
@@ -249,7 +208,10 @@ export function ArticleCreatePage() {
                       alt={articleToEdit.state.article.title}
                     />
                   ) : fileList.length >= 1 ? null : (
-                    uploadButton
+                    <div className="addArticleImage imageArticleContent">
+                      <PlusOutlined className="" />
+                      <div className="image">Ajouter une image</div>
+                    </div>
                   )}
                 </Upload>
               </Form.Item>
@@ -294,6 +256,11 @@ export function ArticleCreatePage() {
               </Modal>
             </Col>
           </Row>
+          <Form.Item>
+            <Button type="primary" htmlType="submit" loading={isLoading}>
+              Enregistrer et publier
+            </Button>
+          </Form.Item>
         </Form>
         {error && <Alert message={error} type="error" closable />}
       </Card>

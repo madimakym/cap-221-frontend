@@ -9,7 +9,7 @@ html {
     --tertiary-color: red;
     --white-color: #FFFFFF;
     --bg-color: rgb(246, 247, 249);
-    --yellow-color: #EBA348;
+    --green-color: #176638;
     --text-color: #494949;
 }
 
@@ -237,4 +237,12 @@ p {
 
 .text-align-center {
     text-align: center;
+}
+
+.ant-upload.ant-upload-select-picture-card {
+    width: -webkit-fill-available;
+}
+
+.ant-upload-list-picture-card-container {
+    width: -webkit-fill-available;
 }

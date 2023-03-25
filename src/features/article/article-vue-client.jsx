@@ -1,56 +1,36 @@
 import React from "react";
-import { Card, List, Row, Col } from "antd";
+import { Row, Col } from "antd";
 import { useFetchArticleQuery } from "./service/article-api";
-import { NavLink, useParams } from "react-router-dom";
 import { API_ROOT } from "../../utils/global-var";
-import Sidebar from "./sidebar";
+import "./style/style.scss";
 
 export function ArticleVueClientPage() {
-  const { name } = useParams();
-  const articles = useFetchArticleQuery(name);
+  const articles = useFetchArticleQuery();
+
   return (
-    <div className="home-page ArticleList">
+    <div className="home-page article-page">
       <Row>
-        <Col lg={6}>
-          <Sidebar />
-        </Col>
         <Col lg={18}>
           {articles && articles.isSuccess && (
-            <List
-              grid={{ gutter: 16, column: 4 }}
-              dataSource={articles.data}
-              renderItem={(item) => (
-                <List.Item>
-                  <div className="article">
-                    <div className="image">
-                      <img
-                        className="imgArticle"
-                        src={
-                          item.image
-                            ? API_ROOT + "/" + item.image
-                            : API_ROOT + "/default.png"
-                        }
-                        alt={item.title}
-                      />
-                    </div>
-                    <Card title={item.title}>
-                      <div
-                        className="articleText"
-                        dangerouslySetInnerHTML={{ __html: item.description }}
-                      />
-                      <NavLink
-                        className="linkClass"
-                        to={"/articles/lire-article/" + item.id}
-                        state={{ article: item }}
-                      >
-                        Lire plus ...
-                      </NavLink>
-                    </Card>
-                    <div className="articleFooter">{item.category}</div>
+            <Row gutter={24}>
+              {articles?.data.map((item, index) => (
+                <Col lg={5} key={index}>
+                  <div className="blc">
+                    <div
+                      className="blc-img"
+                      style={{
+                        backgroundImage: `url(${API_ROOT}/${item.image})`,
+                        backgroundPosition: "center",
+                        backgroundSize: "cover",
+                        backgroundRepeat: "no-repeat",
+                      }}
+                    ></div>
+                    <div className="blc-title">{item.title}</div>
+                    <div className="blc-content">{item.resume}</div>
                   </div>
-                </List.Item>
-              )}
-            />
+                </Col>
+              ))}
+            </Row>
           )}
         </Col>
       </Row>

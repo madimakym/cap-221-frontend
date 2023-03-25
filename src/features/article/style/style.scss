@@ -1,0 +1,23 @@
+.article-page {
+    .blc {
+        background-color: white;
+        border-radius: 20px;
+        margin-bottom: 38px;
+
+        .blc-img {
+            height: 140px;
+            border-top-right-radius: 20px;
+            border-top-left-radius: 20px;
+        }
+
+        .blc-title {
+            padding: 10px;
+            font-weight: 600;
+        }
+
+        .blc-content {
+            padding: 2px 12px 15px 12px;
+            font-size: 14px;
+        }
+    }
+}
