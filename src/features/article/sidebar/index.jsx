@@ -1,8 +1,5 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { Layout, Menu } from "antd";
-
-const { Sider } = Layout;
 
 export function Sidebar() {
   const secteur_articles = [
@@ -49,17 +46,15 @@ export function Sidebar() {
 
   return (
     <>
-      <Sider className="sidebar" style={{ height: "90%", overflowY: "scroll" }}>
-        <Menu>
+      <div className="menu">
+        <ul>
           {secteur_articles.map((item) => (
-            <Menu.Item key={item}>
-              <NavLink to={"/articles-vue-client/" + item}>
-                <span>{item}</span>
-              </NavLink>
-            </Menu.Item>
+            <NavLink to={"/articles-vue-client/" + item}>
+              <span>{item}</span>
+            </NavLink>
           ))}
-        </Menu>
-      </Sider>
+        </ul>
+      </div>
     </>
   );
 }

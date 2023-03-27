@@ -173,7 +173,7 @@ p {
     }
 }
 
-.ArticleList {
+.article-detail {
     .article {
         .ant-card-head-title {
             padding: 0;
@@ -221,13 +221,14 @@ p {
 
     .imgHeader {
         max-height: 450px;
+        border-radius: 30px;
     }
 
     .titleHeader {
         padding-top: 20px;
         padding-left: 1px;
         font-weight: 600;
-        font-size: 3em;
+        font-size: 24px;
     }
 }
 
