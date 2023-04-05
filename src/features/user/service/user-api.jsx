@@ -21,6 +21,33 @@ export const userApi = createApi({
       providesTags: ["User"],
     }),
 
+    userCheckToken: builder.mutation({
+      query: (payload) => ({
+        url: `/api/v1/user/check-token`,
+        method: "POST",
+        body: payload,
+      }),
+      invalidatesTags: ["User"],
+    }),
+
+    userChangePassword: builder.mutation({
+      query: (payload) => ({
+        url: `/api/v1/user/${payload.id}/change-password`,
+        method: "PUT",
+        body: payload,
+      }),
+      invalidatesTags: ["User"],
+    }),
+
+    userResetPassword: builder.mutation({
+      query: (payload) => ({
+        url: `/api/v1/user/reset-password`,
+        method: "POST",
+        body: payload,
+      }),
+      invalidatesTags: ["User"],
+    }),
+
     register: builder.mutation({
       query: (payload) => ({
         url: `/api/v1/auth/register/`,
@@ -47,4 +74,7 @@ export const {
   useFetchUserQuery,
   useRegisterMutation,
   useRegisterCheckMutation,
+  useUserCheckTokenMutation,
+  useUserResetPasswordMutation,
+  useUserChangePasswordMutation,
 } = userApi;

@@ -151,6 +151,10 @@ export function Register1Page() {
                         name="email"
                         rules={[
                           {
+                            type: "email",
+                            message: "Email invalide!",
+                          },
+                          {
                             required: true,
                             message: "Champs requis!",
                           },
@@ -178,26 +182,60 @@ export function Register1Page() {
                     </Col>
                   </Row>
 
-                  <Form.Item
-                    label="Mot de passe"
-                    name="password"
-                    rules={[
-                      {
-                        required: true,
-                        message: "Champs requis!",
-                      },
-                      {
-                        min: 6,
-                        message: "min 6 caractères",
-                      },
-                      {
-                        pattern: /[#?!@$%^&*-]/g,
-                        message: "Veuillez renseigner un caractere special!",
-                      },
-                    ]}
-                  >
-                    <Input.Password placeholder="Définir un mot de passe" />
-                  </Form.Item>
+                  <Row gutter={24}>
+                    <Col lg={12} xs={12}>
+                      {" "}
+                      <Form.Item
+                        label="Mot de passe"
+                        name="password"
+                        rules={[
+                          {
+                            required: true,
+                            message: "Champs requis!",
+                          },
+                          {
+                            min: 6,
+                            message: "min 6 caractères",
+                          },
+                          {
+                            pattern: /[#?!@$%^&*-]/g,
+                            message:
+                              "Veuillez renseigner un caractere special!",
+                          },
+                        ]}
+                      >
+                        <Input.Password placeholder="Définir un mot de passe" />
+                      </Form.Item>
+                    </Col>
+                    <Col lg={12} xs={12}>
+                      <Form.Item
+                        label="Confirmer le nouveau mot de passe"
+                        name="passwordConfirm"
+                        rules={[
+                          { required: true, message: "Champs requis!" },
+                          ({ getFieldValue }) => ({
+                            validator(_, value) {
+                              if (
+                                !value ||
+                                getFieldValue("password") === value
+                              ) {
+                                return Promise.resolve();
+                              }
+                              return Promise.reject(
+                                new Error(
+                                  "Les mots de passe ne correspondent pas!"
+                                )
+                              );
+                            },
+                          }),
+                        ]}
+                        dependencies={["password"]}
+                        hasFeedback
+                      >
+                        <Input.Password placeholder="Définir un mot de passe" />
+                      </Form.Item>
+                    </Col>
+                  </Row>
 
                   <Form.Item>
                     <div className="btn-register">

@@ -11,14 +11,16 @@ import TopBar from "./components/TopBar";
 import MetierPage from "./features/metier";
 import MetierCreatePage from "./features/metier/metier-create";
 import MetierEditPage from "./features/metier/metier-edit";
-import {GetpaidPage} from "./features/user/getpaid";
-import {SuccesspaidPage} from "./features/user/success";
+import { GetpaidPage } from "./features/user/getpaid";
+import { SuccesspaidPage } from "./features/user/success";
 import ArticleCreatePage from "./features/article/article-create";
 import ArticlePage from "./features/article";
 import ArticleVueClientPage from "./features/article/article-vue-client";
 import ArticleLectureClientPage from "./features/article/article-lecture";
 import Register1Page from "./features/auth/register/register-1-page";
 import Register2Page from "./features/auth/register/register-2-page";
+import SendResetPassword from "./features/auth/send-reset-password";
+import ResetPassword from "./features/auth/reset-password";
 
 const { Content } = Layout;
 
@@ -34,16 +36,27 @@ function App() {
           <Route path="/users" element={<ListPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="*" element={<NotFoundPage />} />
+          <Route path="/send-reset-password" element={<SendResetPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
           <Route element={<PrivateWrapper />}>
             <Route path="/dashboard" element={<HomePage />} />
             <Route path="/metiers" element={<MetierPage />} />
             <Route path="/articles" element={<ArticlePage />} />
-            <Route path="/articles-vue-client/:name" element={<ArticleVueClientPage />} />
+            <Route
+              path="/articles-vue-client/:name"
+              element={<ArticleVueClientPage />}
+            />
             <Route path="/metiers/:id" element={<MetierEditPage />} />
             <Route path="/metiers/create" element={<MetierCreatePage />} />
             <Route path="/articles/create" element={<ArticleCreatePage />} />
-            <Route path="/articles/create/:id" element={<ArticleCreatePage />} />
-            <Route path="/articles/lire-article/:id" element={<ArticleLectureClientPage />} />
+            <Route
+              path="/articles/create/:id"
+              element={<ArticleCreatePage />}
+            />
+            <Route
+              path="/articles/lire-article/:id"
+              element={<ArticleLectureClientPage />}
+            />
             {/* <Route path="/user/:role" element={<UserListPage />} />
             <Route path="/appointments" element={<AppointmentList />} />
             <Route path="/orders" element={<OrderList />} />

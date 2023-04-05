@@ -103,6 +103,11 @@ export function LoginPage() {
                   >
                     <Input.Password placeholder="Définir un mot de passe" />
                   </Form.Item>
+                  <div className="forget-password">
+                    <Link to={"/send-reset-password"}>
+                      Mot de passe oublié ?
+                    </Link>
+                  </div>
                   <Form.Item>
                     <Button
                       type="primary"
