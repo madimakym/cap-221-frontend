@@ -1,36 +1,36 @@
 import React, { useState } from "react";
-import { Col, Row, Button, Form, Input, Alert, Select } from "antd";
-import { Link, useNavigate } from "react-router-dom";
-import { useAuthCheckUserMutation } from "../service/auth-api";
-import "../styles/style.scss";
+import { Col, Row, Button, Form, Input, Alert } from "antd";
+import { Link } from "react-router-dom";
+const { TextArea } = Input;
 
-const { Option } = Select;
+// import { useAuthCheckUserMutation } from "../service/auth-api";
+// import "../styles/style.scss";
 
-export function Register1Page() {
-  const navigate = useNavigate();
+export function ContactPage() {
+  // const navigate = useNavigate();
   const [form] = Form.useForm();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [authCheckUser] = useAuthCheckUserMutation();
+  //   const [authCheckUser] = useAuthCheckUserMutation();
 
   const onFinish = async (values) => {
-    setIsLoading(true);
-    authCheckUser({ email: values.email })
-      .unwrap()
-      .then(() => {
+    // setIsLoading(true);
+    // authCheckUser({ email: values.email })
+    //   .unwrap()
+    //   .then(() => {
         setIsLoading(false);
-        setError("Adresse email existante");
-      })
-      .catch((error) => {
-        if (error.data.message === "Cet utilisateur n'existe pas!") {
-          navigate("/register/2", {
-            state: values,
-          });
-        } else {
-          setIsLoading(false);
-          setError(error.data.message);
-        }
-      });
+    //     setError("Adresse email existante");
+    //   })
+    //   .catch((error) => {
+    //     if (error.data.message === "Cet utilisateur n'existe pas!") {
+    //       navigate("/register/2", {
+    //         state: values,
+    //       });
+    //     } else {
+    //       setIsLoading(false);
+    setError(error.data.message);
+    //     }
+    //   });
   };
 
   return (
@@ -92,15 +92,14 @@ export function Register1Page() {
                 </a>
               </div>
               <Link
-                to={"/contact"}
+                to={"/"}
                 style={{
                   color: "black",
                   fontWeight: "600",
                   textDecoration: "revert",
                 }}
               >
-                {" "}
-                Nous contacter
+                Accueil
               </Link>
             </div>
           </div>
@@ -109,13 +108,11 @@ export function Register1Page() {
           <div className="blc-right">
             <div className="section-1">
               <div className="blc-content">
-                <h1>Créez votre compte</h1>
+                <h1>Nous contacter</h1>
                 <p className="subtitle">
-                  Vous êtes 3.765.923 de jeunes garçons et filles hors main
-                  d’œuvre potentielle et inactifs. Aidez nous à vous recenser et
-                  à vous orienter.
+                  Remplissez le formulaire ci-dessous et nous vous répondrons
+                  dans un délai de 48 heures ouvrées
                 </p>
-
                 <Form
                   name="basic"
                   form={form}
@@ -206,8 +203,8 @@ export function Register1Page() {
                     </Col>
                     <Col lg={12} xs={12}>
                       <Form.Item
-                        label="Genre"
-                        name="genre"
+                        label="Ville"
+                        name="ville"
                         rules={[
                           {
                             required: true,
@@ -215,65 +212,24 @@ export function Register1Page() {
                           },
                         ]}
                       >
-                        <Select placeholder="">
-                          <Option value="homme">Homme</Option>
-                          <Option value="femme">Femme</Option>
-                        </Select>
+                        <Input />
                       </Form.Item>
                     </Col>
                   </Row>
 
-                  <Row gutter={24}>
-                    <Col lg={12} xs={12}>
-                      {" "}
+                  <Row>
+                    <Col lg={24} xs={24}>
                       <Form.Item
-                        label="Mot de passe"
-                        name="password"
+                        label="Message"
+                        name="message"
                         rules={[
                           {
                             required: true,
                             message: "Champs requis!",
                           },
-                          {
-                            min: 6,
-                            message: "min 6 caractères",
-                          },
-                          {
-                            pattern: /[#?!@$%^&*-]/g,
-                            message:
-                              "Veuillez renseigner un caractere special!",
-                          },
                         ]}
                       >
-                        <Input.Password placeholder="Définir un mot de passe" />
-                      </Form.Item>
-                    </Col>
-                    <Col lg={12} xs={12}>
-                      <Form.Item
-                        label="Confirmer le nouveau mot de passe"
-                        name="passwordConfirm"
-                        rules={[
-                          { required: true, message: "Champs requis!" },
-                          ({ getFieldValue }) => ({
-                            validator(_, value) {
-                              if (
-                                !value ||
-                                getFieldValue("password") === value
-                              ) {
-                                return Promise.resolve();
-                              }
-                              return Promise.reject(
-                                new Error(
-                                  "Les mots de passe ne correspondent pas!"
-                                )
-                              );
-                            },
-                          }),
-                        ]}
-                        dependencies={["password"]}
-                        hasFeedback
-                      >
-                        <Input.Password placeholder="Définir un mot de passe" />
+                        <TextArea rows={4} />
                       </Form.Item>
                     </Col>
                   </Row>
@@ -286,16 +242,11 @@ export function Register1Page() {
                         className="btn-lg"
                         loading={isLoading}
                       >
-                        Continuer
+                        Envoyer
                       </Button>
                     </div>
                   </Form.Item>
                 </Form>
-                <p>
-                  Vous avez déjà un compte ?{" "}
-                  <Link to={"/login"}> Se connecter</Link>
-                </p>
-
                 {error && <Alert message={error} type="error" closable />}
               </div>
             </div>
@@ -306,4 +257,4 @@ export function Register1Page() {
   );
 }
 
-export default Register1Page;
+export default ContactPage;

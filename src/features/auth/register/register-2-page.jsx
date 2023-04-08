@@ -117,6 +117,47 @@ export function Register1Page() {
                   <em>Notre objectif : Un métier pour tous !</em>
                 </span>
               </p>
+              <div className="reseaux-sociaux">
+                <a
+                  href="https://instagram.com/cap221jangligeey?igshid=Mzc0YWU1OWY="
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <img src="assets/img/icons-instagram.png" alt="cap221" />
+                </a>
+                <a
+                  href="https://twitter.com/jangligeeytekki?s=08"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <img src="assets/img/icons-twitter.png" alt="cap221" />
+                </a>
+                <a
+                  href="https://www.youtube.com/@jangligeeytekki8067"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <img src="assets/img/icons-youtube.png" alt="cap221" />
+                </a>
+                <a
+                  href="https://www.snapchat.com/add/jangligeeytekki?share_id=AHQNV0IK1J0&locale=en-US"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <img src="assets/img/icons-snapchat.png" alt="cap221" />
+                </a>
+              </div>
+              <Link
+                to={"/contact"}
+                style={{
+                  color: "black",
+                  fontWeight: "600",
+                  textDecoration: "revert",
+                }}
+              >
+                {" "}
+                Nous contacter
+              </Link>
             </div>
           </div>
         </Col>

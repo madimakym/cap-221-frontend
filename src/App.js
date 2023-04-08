@@ -21,6 +21,7 @@ import Register1Page from "./features/auth/register/register-1-page";
 import Register2Page from "./features/auth/register/register-2-page";
 import SendResetPassword from "./features/auth/send-reset-password";
 import ResetPassword from "./features/auth/reset-password";
+import ContactPage from "./features/contact";
 
 const { Content } = Layout;
 
@@ -38,6 +39,7 @@ function App() {
           <Route path="*" element={<NotFoundPage />} />
           <Route path="/send-reset-password" element={<SendResetPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/contact" element={<ContactPage />} />
           <Route element={<PrivateWrapper />}>
             <Route path="/dashboard" element={<HomePage />} />
             <Route path="/metiers" element={<MetierPage />} />
