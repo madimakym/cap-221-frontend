@@ -18,7 +18,7 @@ export function ContactPage() {
     // authCheckUser({ email: values.email })
     //   .unwrap()
     //   .then(() => {
-        setIsLoading(false);
+    setIsLoading(false);
     //     setError("Adresse email existante");
     //   })
     //   .catch((error) => {
@@ -45,22 +45,29 @@ export function ContactPage() {
                 alt="cap221"
               />
               <p>
+                Vous êtes <strong>3.765.923</strong> de jeunes, garçons et
+                filles, hors main-d’œuvre potentielle et inactifs.
+              </p>
+              <p>Aidez-nous à vous recenser et à vous orienter.</p>
+              <p>
                 <span style={{ color: "green" }}>Jàng Ligeey Tekki</span> est
                 une plateforme d’orientation professionnelle pour découvrir et
-                te former aux métiers d’aujourd’hui et de demain.
+                vous former aux métiers d’aujourd’hui et de demain.
                 <br /> <br />
                 <span style={{ color: "#f5d200" }}>Jàng Ligeey Tekki</span> est
-                un moteur de recherche pour booster ta carrière en développant
-                des compétences très recherchées sur le marché de l’emploi.
+                un moteur de recherche pour booster votre carrière en
+                développant des compétences très recherchées sur le marché de
+                l’emploi.
                 <br /> <br />
-                <span style={{ color: "red" }}> Jàng Ligeey Tekki</span> t’offre
-                plus de 750 Métiers pour ton indépendance et ton épanouissement
-                en découvrant le métier de tes rêves.
+                <span style={{ color: "red" }}> Jàng Ligeey Tekki</span> vous
+                offre plus de 750 Métiers pour votre indépendance et
+                votreépanouissement en découvrant le métier de vos rêves.
                 <br /> <br />
                 <span>
                   <em>Notre objectif : Un métier pour tous !</em>
                 </span>
               </p>
+
               <div className="reseaux-sociaux">
                 <a
                   href="https://instagram.com/cap221jangligeey?igshid=Mzc0YWU1OWY="
@@ -102,6 +109,8 @@ export function ContactPage() {
                 Accueil
               </Link>
             </div>
+            <br /> <br />
+            <br /> <br />
           </div>
         </Col>
         <Col lg={12} xs={24}>
