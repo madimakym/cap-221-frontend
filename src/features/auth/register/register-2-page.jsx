@@ -101,11 +101,6 @@ export function Register1Page() {
                 alt="cap221"
               />
               <p>
-                Vous êtes <strong>3.765.923</strong> de jeunes, garçons et
-                filles, hors main-d’œuvre potentielle et inactifs.
-              </p>
-              <p>Aidez-nous à vous recenser et à vous orienter.</p>
-              <p>
                 <span style={{ color: "green" }}>Jàng Ligeey Tekki</span> est
                 une plateforme d’orientation professionnelle pour découvrir et
                 vous former aux métiers d’aujourd’hui et de demain.

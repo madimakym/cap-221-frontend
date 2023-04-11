@@ -181,16 +181,7 @@ export function ArticleCreatePage() {
               </Form.Item>
             </Col>
             <Col lg={6}>
-              <Form.Item
-                label="Image de l'article"
-                name="imageArticle"
-                rules={[
-                  {
-                    required: true,
-                    message: "Champs requis!",
-                  },
-                ]}
-              >
+              <Form.Item label="Image de l'article" name="imageArticle">
                 <Upload
                   listType="picture-card"
                   fileList={fileList}
