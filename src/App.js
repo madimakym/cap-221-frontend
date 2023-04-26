@@ -12,7 +12,6 @@ import MetierCreatePage from "./features/metier/metier-create";
 import MetierEditPage from "./features/metier/metier-edit";
 import { GetpaidPage } from "./features/user/getpaid";
 import { SuccesspaidPage } from "./features/user/success";
-import ArticleCreatePage from "./features/article/article-create";
 import ArticlePage from "./features/article";
 import PostPage from "./features/article/post-page";
 import Register1Page from "./features/auth/register/register-1-page";
@@ -46,7 +45,6 @@ function App() {
             <Route path="/posts/:id" element={<PostsPage />} />
             <Route path="/metiers/:id" element={<MetierEditPage />} />
             <Route path="/metiers/create" element={<MetierCreatePage />} />
-            <Route path="/articles/create" element={<ArticleCreatePage />} />
             <Route path="/post/:id" element={<PostPage />} />
             <Route path="/login" element={<LoginPage />} />
           </Route>

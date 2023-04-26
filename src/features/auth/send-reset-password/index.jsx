@@ -84,6 +84,10 @@ export function SendResetPassword() {
                         Envoyer
                       </Button>
                     </Form.Item>
+
+                    <div className="btn-link">
+                      <Link to={"/"}>Retour</Link>
+                    </div>
                   </Form>
                 </div>
               ) : (

@@ -30,15 +30,9 @@ export function PostsPage() {
                       to={"/post/" + item.id}
                       state={{ article: item }}
                     >
-                      <div
-                        className="blc-img"
-                        // style={{
-                        //   backgroundImage: `url(${API_ROOT}/${item.image})`,
-                        //   backgroundPosition: "center",
-                        //   backgroundSize: "cover",
-                        //   backgroundRepeat: "no-repeat",
-                        // }}
-                      />
+                      <div className="blc-img">
+                        <img src="/assets/img/cap221-logo.png" width={150} alt="" />
+                      </div>
                       <div className="blc-title">{item.title.rendered}</div>
                       <div className="blc-content">
                         <p

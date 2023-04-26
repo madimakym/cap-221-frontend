@@ -45,7 +45,7 @@ export function ResetPassword() {
           <div className="section-reset-password">
             <div className="blc-content">
               <img
-                src="/assets/img/logo-black-hd.png"
+                src="assets/img/cap221-logo.png"
                 className="logo"
                 alt="kliner"
               />
