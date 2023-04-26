@@ -1,11 +1,30 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { API_ROOT } from "../../../utils/global-var";
 
 export const articleApi = createApi({
   reducerPath: "articleApi",
-  baseQuery: fetchBaseQuery({ baseUrl: API_ROOT }),
+  baseQuery: fetchBaseQuery({ baseUrl: "https://www.blog.cap221.com/" }),
   tagTypes: ["Article"],
   endpoints: (builder) => ({
+    fetchCaterories: builder.query({
+      query: () => `/wp-json/wp/v2/categories?per_page=20`,
+      providesTags: ["Article"],
+    }),
+
+    fetchPosts: builder.query({
+      query: () => `/wp-json/wp/v2/posts/?per_page=20`,
+      providesTags: ["Article"],
+    }),
+
+    fetchPost: builder.query({
+      query: (id) => `/wp-json/wp/v2/posts/${id}`,
+      providesTags: ["Article"],
+    }),
+
+    fetchCategoryPosts: builder.query({
+      query: (id) => `/wp-json/wp/v2/posts/?categories=${id}`,
+      providesTags: ["Article"],
+    }),
+
     fetchArticle: builder.query({
       query: (name) => `/api/v1/article/category/${name}`,
       providesTags: ["Article"],
@@ -55,6 +74,10 @@ export const articleApi = createApi({
 });
 
 export const {
+  useFetchCategoryPostsQuery,
+  useFetchCateroriesQuery,
+  useFetchPostQuery,
+  useFetchPostsQuery,
   useFetchArticleQuery,
   useFetchByGroupeMutation,
   useFetchOneArticleQuery,

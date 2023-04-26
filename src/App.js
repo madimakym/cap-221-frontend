@@ -1,6 +1,5 @@
 import { HelmetProvider } from "react-helmet-async";
 import { BrowserRouter, Route, Routes, Outlet } from "react-router-dom";
-// import { RegisterPage } from "./features/user";
 import { NotFoundPage } from "./features/NotFound";
 import { ListPage } from "./features/user/list";
 import LoginPage from "./features/auth/login-page";
@@ -15,13 +14,13 @@ import { GetpaidPage } from "./features/user/getpaid";
 import { SuccesspaidPage } from "./features/user/success";
 import ArticleCreatePage from "./features/article/article-create";
 import ArticlePage from "./features/article";
-import ArticleVueClientPage from "./features/article/article-vue-client";
-import ArticleLectureClientPage from "./features/article/article-lecture";
+import PostPage from "./features/article/post-page";
 import Register1Page from "./features/auth/register/register-1-page";
 import Register2Page from "./features/auth/register/register-2-page";
 import SendResetPassword from "./features/auth/send-reset-password";
 import ResetPassword from "./features/auth/reset-password";
 import ContactPage from "./features/contact";
+import PostsPage from "./features/article/posts-page";
 
 const { Content } = Layout;
 
@@ -44,28 +43,11 @@ function App() {
             <Route path="/dashboard" element={<HomePage />} />
             <Route path="/metiers" element={<MetierPage />} />
             <Route path="/articles" element={<ArticlePage />} />
-            <Route
-              path="/articles-vue-client/:name"
-              element={<ArticleVueClientPage />}
-            />
+            <Route path="/posts/:id" element={<PostsPage />} />
             <Route path="/metiers/:id" element={<MetierEditPage />} />
             <Route path="/metiers/create" element={<MetierCreatePage />} />
             <Route path="/articles/create" element={<ArticleCreatePage />} />
-            <Route
-              path="/articles/create/:id"
-              element={<ArticleCreatePage />}
-            />
-            <Route
-              path="/articles/lire-article/:id"
-              element={<ArticleLectureClientPage />}
-            />
-            {/* <Route path="/user/:role" element={<UserListPage />} />
-            <Route path="/appointments" element={<AppointmentList />} />
-            <Route path="/orders" element={<OrderList />} />
-            <Route path="/products" element={<ProductList />} />
-            <Route path="/payments" element={<PaymentList />} />
-            <Route path="/products/create" element={<ProductCreate />} />
-            <Route path="/products/edit/:id/:slug" element={<ProductEdit />} /> */}
+            <Route path="/post/:id" element={<PostPage />} />
             <Route path="/login" element={<LoginPage />} />
           </Route>
         </Routes>

@@ -12,6 +12,7 @@ export function Sidebar() {
   const navigate = useNavigate();
   const location = useLocation();
   const userData = getUser();
+
   const handleLogout = () => {
     navigate("/login");
   };
@@ -43,10 +44,16 @@ export function Sidebar() {
               </Menu.Item>
 
               <Menu.Item key="/articles">
-                <NavLink to={"/articles"}>
-                  <MenuOutlined />
-                  <span>Articles</span>
-                </NavLink>
+                <MenuOutlined />
+                <span>
+                  <a
+                    href="https://www.blog.cap221.com/wp-admin/edit.php?post_type=post"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Articles
+                  </a>
+                </span>
               </Menu.Item>
             </>
           ) : (
@@ -55,8 +62,8 @@ export function Sidebar() {
 
           {userData.role === "user" ? (
             <>
-              <Menu.Item key="/articles-vue-client">
-                <NavLink to={"/articles-vue-client/TOUS"}>
+              <Menu.Item key="/posts">
+                <NavLink to={"/posts/2"}>
                   <MenuOutlined />
                   <span>Articles</span>
                 </NavLink>
