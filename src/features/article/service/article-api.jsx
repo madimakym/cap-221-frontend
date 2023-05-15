@@ -6,12 +6,12 @@ export const articleApi = createApi({
   tagTypes: ["Article"],
   endpoints: (builder) => ({
     fetchCaterories: builder.query({
-      query: () => `/wp-json/wp/v2/categories?per_page=20`,
+      query: () => `/wp-json/wp/v2/categories?per_page=100`,
       providesTags: ["Article"],
     }),
 
     fetchPosts: builder.query({
-      query: () => `/wp-json/wp/v2/posts/?per_page=20`,
+      query: () => `/wp-json/wp/v2/posts/?per_page=100`,
       providesTags: ["Article"],
     }),
 
@@ -21,7 +21,7 @@ export const articleApi = createApi({
     }),
 
     fetchCategoryPosts: builder.query({
-      query: (id) => `/wp-json/wp/v2/posts/?categories=${id}`,
+      query: (id) => `/wp-json/wp/v2/posts/?categories=${id}&_fields=id,title,content,excerpt&excerpt_length=10`,
       providesTags: ["Article"],
     }),
 

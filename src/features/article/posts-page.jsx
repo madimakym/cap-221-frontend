@@ -2,15 +2,12 @@ import React from "react";
 import { Row, Col } from "antd";
 import { useFetchCategoryPostsQuery } from "./service/article-api";
 import { NavLink, useParams } from "react-router-dom";
-// import { API_ROOT } from "../../utils/global-var";
 import "./style/style.scss";
 import Sidebar from "./sidebar";
 
 export function PostsPage() {
   const { id } = useParams();
   const posts = useFetchCategoryPostsQuery(id);
-
-  console.log("posts:", posts);
 
   return (
     <div className="home-page article-page">
@@ -23,17 +20,27 @@ export function PostsPage() {
           {posts && posts.isSuccess && (
             <Row gutter={24}>
               {posts?.data.map((item, index) => (
-                <Col lg={6} key={index}>
-                  <div className="blc">
+                <Col lg={6} key={index} style={{ marginBottom: "10px" }}>
+                  <div className="blc" style={{ height: "100%" }}>
                     <NavLink
                       className="linkClass"
                       to={"/post/" + item.id}
                       state={{ article: item }}
                     >
                       <div className="blc-img">
-                        <img src="/assets/img/cap221-logo.png" width={150} alt="" />
+                        <img
+                          src="/assets/img/cap221-logo.png"
+                          width={150}
+                          alt=""
+                        />
                       </div>
-                      <div className="blc-title">{item.title.rendered}</div>
+                      <div className="blc-title">
+                        <span
+                          dangerouslySetInnerHTML={{
+                            __html: item.title.rendered,
+                          }}
+                        />
+                      </div>
                       <div className="blc-content">
                         <p
                           dangerouslySetInnerHTML={{
@@ -43,6 +50,9 @@ export function PostsPage() {
                       </div>
                     </NavLink>
                   </div>
+                  <br />
+                  <br />
+                  <br />
                 </Col>
               ))}
             </Row>

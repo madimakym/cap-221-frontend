@@ -10,11 +10,13 @@ export function Sidebar() {
       <div className="menu">
         {cartegories.isSuccess && (
           <ul>
-            {cartegories.data.map((item, index) => (
-              <NavLink to={"/posts/" + item.id} key={index}>
-                <span>{item.name}</span>
-              </NavLink>
-            ))}
+            {cartegories.data
+              .filter((item) => item.name !== "Uncategorized")
+              .map((item, index) => (
+                <NavLink to={"/posts/" + item.id} key={index}>
+                  <span>{item.name}</span>
+                </NavLink>
+              ))}
           </ul>
         )}
       </div>
