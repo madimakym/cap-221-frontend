@@ -145,8 +145,8 @@ export function Register1Page() {
                 l’emploi.
                 <br /> <br />
                 <span style={{ color: "red" }}> Jàng Ligeey Tekki</span> vous
-                offre plus de 750 Métiers pour votre indépendance et
-                votre épanouissement en découvrant le métier de vos rêves.
+                offre plus de 750 Métiers pour votre indépendance et votre
+                épanouissement en découvrant le métier de vos rêves.
                 <br /> <br />
                 <span>
                   <em>Notre objectif : Un métier pour tous !</em>

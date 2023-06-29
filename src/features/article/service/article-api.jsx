@@ -21,7 +21,7 @@ export const articleApi = createApi({
     }),
 
     fetchCategoryPosts: builder.query({
-      query: (id) => `/wp-json/wp/v2/posts/?categories=${id}&_fields=id,title,content,excerpt&excerpt_length=10`,
+      query: (id) => `/wp-json/wp/v2/posts/?categories=${id}&per_page=100`,
       providesTags: ["Article"],
     }),
 

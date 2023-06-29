@@ -24,13 +24,19 @@ export function PostPage() {
             // alt={state.state.article.title}
           /> */}
             <br />
-            <h1 className="titleHeader">{post.data.title.rendered}</h1>
+            <h1 className="titleHeader">
+              <span
+                dangerouslySetInnerHTML={{
+                  __html: post.data.title.rendered,
+                }}
+              />
+            </h1>
 
-          <p
-            dangerouslySetInnerHTML={{
-              __html: post.data.content.rendered,
-            }}
-          />
+            <p
+              dangerouslySetInnerHTML={{
+                __html: post.data.content.rendered,
+              }}
+            />
           </Col>
         )}
 
