@@ -11,6 +11,7 @@ export function Register1Page() {
   const [form] = Form.useForm();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [showDiplome, setShowDiplome] = useState(false);
   const [authCheckUser] = useAuthCheckUserMutation();
 
   const onFinish = async (values) => {
@@ -32,6 +33,12 @@ export function Register1Page() {
         }
       });
   };
+
+
+  const handleChange = (value) => {
+    setShowDiplome(value)
+  };
+
 
   return (
     <div className="auth-page" data-aos="fade-in">
@@ -275,6 +282,38 @@ export function Register1Page() {
                         <Input.Password placeholder="Définir un mot de passe" />
                       </Form.Item>
                     </Col>
+                  </Row>
+
+                  <Row gutter={24}>
+                    <Col lg={12} xs={12}>
+                      <Form.Item
+                        label="Formation"
+                        name="formation"
+                        rules={[{ required: true, message: "Champs requis!" }]}>
+                        <Select placeholder="" onChange={handleChange}>
+                          <Option value="sans diplôme">Sans diplôme</Option>
+                          <Option value="avec diplôme">Avec diplôme </Option>
+                        </Select>
+                      </Form.Item>
+                    </Col>
+
+                    {
+                      showDiplome === "avec diplôme" &&
+                      <Col lg={12} xs={12}>
+                        <Form.Item
+                          label="Diplome"
+                          name="diplome"
+                          rules={[{ required: true, message: "Champs requis!" }]}>
+                          <Select placeholder="">
+                            <Option value="BEFEM arabe">BEFEM arabe</Option>
+                            <Option value="BEFEM Francais"> BEFEM Francais </Option>
+                            <Option value="BAC Arabe"> BAC Arabe </Option>
+                            <Option value="BAC Francais"> BAC Francais </Option>
+                          </Select>
+                        </Form.Item>
+                      </Col>
+                    }
+
                   </Row>
 
                   <Form.Item>
