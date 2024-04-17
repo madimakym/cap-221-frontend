@@ -287,7 +287,7 @@ export function Register1Page() {
                   <Row gutter={24}>
                     <Col lg={12} xs={12}>
                       <Form.Item
-                        label="Formation"
+                        label="Niveau d'étude"
                         name="formation"
                         rules={[{ required: true, message: "Champs requis!" }]}>
                         <Select placeholder="" onChange={handleChange}>
@@ -305,8 +305,8 @@ export function Register1Page() {
                           name="diplome"
                           rules={[{ required: true, message: "Champs requis!" }]}>
                           <Select placeholder="">
-                            <Option value="BEFEM arabe">BEFEM arabe</Option>
-                            <Option value="BEFEM Francais"> BEFEM Francais </Option>
+                            <Option value="BFEM arabe">BFEM arabe</Option>
+                            <Option value="BFEM Francais"> BFEM Francais </Option>
                             <Option value="BAC Arabe"> BAC Arabe </Option>
                             <Option value="BAC Francais"> BAC Francais </Option>
                           </Select>
